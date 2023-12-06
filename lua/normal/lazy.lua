@@ -12,28 +12,43 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Setup lazy.nvim
-require("lazy").setup({
-    -- Add plugins here
-    "ThePrimeagen/vim-be-good",
-    "tomasiser/vim-code-dark",
-    "nvim-telescope/telescope.nvim",
-    "nvim-lua/plenary.nvim",
+local colorscheme = {
     "nvim-treesitter/nvim-treesitter",
-    "github/copilot.vim",
-    "theprimeagen/harpoon",
-    "mbbill/undotree",
-    "tpope/vim-fugitive",
-    "VonHeikemen/lsp-zero.nvim",
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    "tjdevries/colorbuddy.vim",
+    "Th3Whit3Wolf/onebuddy",
+}
+
+local lsp = {
     "neovim/nvim-lspconfig",
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-nvim-lsp",
     "L3MON4D3/LuaSnip",
+    "VonHeikemen/lsp-zero.nvim",
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+}
+
+local navigation = {
+    "nvim-telescope/telescope.nvim",
+    "theprimeagen/harpoon",
+    "mbbill/undotree",
+    "tpope/vim-fugitive",
     "nvim-tree/nvim-tree.lua",
     "nvim-tree/nvim-web-devicons",
-    "tjdevries/colorbuddy.vim",
-    "Th3Whit3Wolf/onebuddy",
+}
+
+local misc = {
+    "ThePrimeagen/vim-be-good",
+    "github/copilot.vim",
     "m4xshen/autoclose.nvim",
+    "nvim-lua/plenary.nvim",
+}
+
+-- Setup lazy.nvim
+require("lazy").setup({
+    -- Add plugins here
+    colorscheme,
+    lsp,
+    navigation,
+    misc,
 })
