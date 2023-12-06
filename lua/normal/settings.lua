@@ -3,7 +3,7 @@ vim.g.mapleader = ";"
 vim.api.nvim_command('command! Q quitall')
 
 -- Insert mode QOL
-local wrappers = { '""', "''", "``", "()", "[]", "{}", "<>" }
+local wrappers = { '""', "''", "``", "()", "[]", "{}" }
 
 for _, wrapper in ipairs(wrappers) do
     local left = wrapper:sub(1, 1)
