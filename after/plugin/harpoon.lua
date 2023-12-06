@@ -1,4 +1,4 @@
-local function nvim_setup()
+if not vim.g.vscode then
     local harpoon = require("harpoon")
 
     -- REQUIRED
@@ -12,7 +12,3 @@ local function nvim_setup()
     vim.keymap.set("n", "<C-3>", function() harpoon:list():select(3) end)
     vim.keymap.set("n", "<C-4>", function() harpoon:list():select(4) end)
 end
-
-return {
-    nvim_setup = nvim_setup,
-}

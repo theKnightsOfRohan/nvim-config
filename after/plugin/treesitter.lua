@@ -1,4 +1,4 @@
-local function nvim_setup()
+if not vim.g.vscode then
     require 'nvim-treesitter.configs'.setup {
         -- A list of parser names, or "all" (the five listed parsers should always be installed)
         ensure_installed = { "c", "c_sharp", "python", "lua", "vim", "vimdoc", "query", "java", "javascript", "typescript", "html", "markdown" },
@@ -21,7 +21,3 @@ local function nvim_setup()
         },
     }
 end
-
-return {
-    nvim_setup = nvim_setup,
-}

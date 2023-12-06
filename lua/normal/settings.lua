@@ -3,6 +3,8 @@ vim.g.mapleader = ";"
 vim.api.nvim_command('command! Q quitall')
 
 -- Normal mode QOL
+vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-v>', '"+p', { noremap = true })
 
 -- Insert mode QOL
 

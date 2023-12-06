@@ -1,4 +1,4 @@
-local function nvim_setup()
+if not vim.g.vscode then
     local lsp = require('lsp-zero')
 
     lsp.preset("recommended")
@@ -35,7 +35,3 @@ local function nvim_setup()
 
     lsp.setup()
 end
-
-return {
-    nvim_setup = nvim_setup,
-}

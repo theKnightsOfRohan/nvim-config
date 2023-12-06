@@ -1,4 +1,4 @@
-local function nvim_setup()
+if not vim.g.vscode then
     local builtin = require("telescope.builtin")
     vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
     vim.keymap.set("n", "<leader>gf", builtin.git_files, {})
@@ -8,7 +8,3 @@ local function nvim_setup()
         })
     end)
 end
-
-return {
-    nvim_setup = nvim_setup,
-}

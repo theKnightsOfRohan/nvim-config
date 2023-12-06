@@ -1,4 +1,4 @@
-local function nvim_setup()
+if not vim.g.vscode then
     -- disable netrw to avoid conflicts
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
@@ -27,7 +27,3 @@ local function nvim_setup()
     -- requires arg, so can't use above format
     vim.api.nvim_set_keymap('n', '<leader>f', ':wincmd l<CR>', { noremap = true })
 end
-
-return {
-    nvim_setup = nvim_setup,
-}

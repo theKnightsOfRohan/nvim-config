@@ -1,7 +1,3 @@
-local function nvim_setup()
+if not vim.g.vscode then
     require("autoclose").setup()
 end
-
-return {
-    nvim_setup = nvim_setup
-}
