@@ -35,4 +35,5 @@ require("lazy").setup({
     "nvim-tree/nvim-web-devicons",
     "tjdevries/colorbuddy.vim",
     "Th3Whit3Wolf/onebuddy",
+    "m4xshen/autoclose.nvim",
 })
