@@ -7,5 +7,5 @@ local function nvim_setup()
 end
 
 return {
-    nvim_setup = nvim_setup
+    nvim_setup = nvim_setup,
 }
