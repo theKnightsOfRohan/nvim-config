@@ -1,6 +1,7 @@
 if vim.g.vscode then
     return
 else
+    require("after.plugin.colors").nvim_setup()
     require("after.plugin.filetree").nvim_setup()
     require("after.plugin.fugitive").nvim_setup()
     require("after.plugin.harpoon").nvim_setup()

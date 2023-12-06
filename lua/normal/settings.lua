@@ -2,6 +2,8 @@
 vim.g.mapleader = ";"
 vim.api.nvim_command('command! Q quitall')
 
+-- Normal mode QOL
+
 -- Insert mode QOL
 local wrappers = { '""', "''", "``", "()", "[]", "{}" }
 
@@ -24,7 +26,6 @@ for _, wrapper in ipairs(wrappers) do
 end
 
 -- Visual mode QOL
-vim.api.nvim_set_keymap('v', '<', '<gv', { noremap = true })
 
 -- General settings
 vim.opt.relativenumber = true
