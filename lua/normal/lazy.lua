@@ -6,7 +6,7 @@ if not vim.loop.fs_stat(lazypath) then
         "clone",
         "--filter=blob:none",
         "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
+        "--branch=stable",
         lazypath,
     })
 end
@@ -31,10 +31,14 @@ local lsp = {
 local navigation = {
     "nvim-telescope/telescope.nvim",
     "theprimeagen/harpoon",
-    "mbbill/undotree",
-    "tpope/vim-fugitive",
     "nvim-tree/nvim-tree.lua",
     "nvim-tree/nvim-web-devicons",
+}
+
+local git = {
+    "mhinz/vim-signify",
+    "tpope/vim-fugitive",
+    "mbbill/undotree",
 }
 
 local misc = {
@@ -50,5 +54,6 @@ require("lazy").setup({
     colorscheme,
     lsp,
     navigation,
+    git,
     misc,
 })
