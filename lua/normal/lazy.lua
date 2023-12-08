@@ -46,6 +46,7 @@ local misc = {
     "github/copilot.vim",
     "m4xshen/autoclose.nvim",
     "nvim-lua/plenary.nvim",
+    "s1n7ax/nvim-terminal",
 }
 
 -- Setup lazy.nvim
