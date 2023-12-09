@@ -17,7 +17,7 @@ if not vim.g.vscode then
             group_empty = true,
         },
         filters = {
-            dotfiles = true,
+            dotfiles = false,
         },
     })
 

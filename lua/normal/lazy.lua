@@ -33,6 +33,7 @@ local navigation = {
     "theprimeagen/harpoon",
     "nvim-tree/nvim-tree.lua",
     "nvim-tree/nvim-web-devicons",
+    "s1n7ax/nvim-terminal",
 }
 
 local git = {
@@ -46,7 +47,7 @@ local misc = {
     "github/copilot.vim",
     "m4xshen/autoclose.nvim",
     "nvim-lua/plenary.nvim",
-    "s1n7ax/nvim-terminal",
+    "numToStr/Comment.nvim",
 }
 
 -- Setup lazy.nvim
