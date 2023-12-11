@@ -16,6 +16,7 @@ local colorscheme = {
     "nvim-treesitter/nvim-treesitter",
     "tjdevries/colorbuddy.vim",
     "Th3Whit3Wolf/onebuddy",
+    "nvim-lualine/lualine.nvim",
 }
 
 local lsp = {
