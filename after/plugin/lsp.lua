@@ -14,6 +14,7 @@ local cmp = require('cmp')
 cmp.setup({
     window = {
         documentation = cmp.config.window.bordered(),
+        completion = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
         ['<C-CR>'] = cmp.mapping.complete(),
