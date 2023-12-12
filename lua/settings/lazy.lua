@@ -43,12 +43,15 @@ local git = {
     "mbbill/undotree",
 }
 
+local input = {
+    "m4xshen/autoclose.nvim",
+    "numToStr/Comment.nvim",
+}
+
 local misc = {
     "ThePrimeagen/vim-be-good",
     "github/copilot.vim",
-    "m4xshen/autoclose.nvim",
     "nvim-lua/plenary.nvim",
-    "numToStr/Comment.nvim",
 }
 
 -- Setup lazy.nvim
@@ -58,5 +61,6 @@ require("lazy").setup({
     lsp,
     navigation,
     git,
+    input,
     misc,
 })
