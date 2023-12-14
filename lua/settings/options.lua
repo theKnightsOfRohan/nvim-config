@@ -35,5 +35,6 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.fillchars = { eob = " " }
+vim.opt.scrolloff = 10
 vim.opt.timeoutlen = 500
 vim.opt.updatetime = 100
