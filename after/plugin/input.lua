@@ -1,3 +1,7 @@
+if vim.g.vscode then
+    return
+end
+
 require("autoclose").setup({
     options = {
         disable_command_mode = true,

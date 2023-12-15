@@ -1,3 +1,7 @@
+if vim.g.vscode then
+    return
+end
+
 vim.o.hidden = true
 
 require('nvim-terminal').setup({

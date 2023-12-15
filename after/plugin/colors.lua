@@ -1,3 +1,7 @@
+if vim.g.vscode then
+    return
+end
+
 -- COLORSCHEME
 
 require('colorbuddy').colorscheme('onebuddy')
