@@ -37,7 +37,6 @@ local navigation = {
     "nvim-telescope/telescope.nvim",
     "theprimeagen/harpoon",
     "nvim-tree/nvim-tree.lua",
-    "s1n7ax/nvim-terminal",
 }
 
 local git = {

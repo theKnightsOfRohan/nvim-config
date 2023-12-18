@@ -2,6 +2,11 @@ if vim.g.vscode then
     return
 end
 
+-- TERMINAL
+vim.o.hidden = true
+
+vim.keymap.set("n", "<leader>t", vim.cmd.terminal);
+
 -- COLORSCHEME
 
 require('colorbuddy').colorscheme('onebuddy')
