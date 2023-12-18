@@ -9,7 +9,7 @@ vim.api.nvim_set_keymap('n', '<C-v>', '"+p', { noremap = true })
 vim.api.nvim_set_keymap('i', '<C-v>', '<Esc>"+pi', { noremap = true })
 
 -- Quick save
-vim.api.nvim_set_keymap('n', '<leader>s', ':w<CR>', { noremap = true })
+vim.keymap.set('n', '<leader>s', vim.cmd.write, { noremap = true })
 
 -- Visual mode bracket surround
 local surrounders = {

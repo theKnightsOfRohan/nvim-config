@@ -19,8 +19,8 @@ local ui = {
     "nvim-lualine/lualine.nvim",
     "nvim-tree/nvim-web-devicons",
     --[[ "folke/noice.nvim",
-    "rcarriga/nvim-notify",
     "MunifTanjim/nui.nvim", ]]
+    "rcarriga/nvim-notify",
 }
 
 local lsp = {
