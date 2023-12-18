@@ -12,11 +12,15 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local colorscheme = {
+local ui = {
     "nvim-treesitter/nvim-treesitter",
     "tjdevries/colorbuddy.vim",
     "Th3Whit3Wolf/onebuddy",
     "nvim-lualine/lualine.nvim",
+    "nvim-tree/nvim-web-devicons",
+    --[[ "folke/noice.nvim",
+    "rcarriga/nvim-notify",
+    "MunifTanjim/nui.nvim", ]]
 }
 
 local lsp = {
@@ -33,7 +37,6 @@ local navigation = {
     "nvim-telescope/telescope.nvim",
     "theprimeagen/harpoon",
     "nvim-tree/nvim-tree.lua",
-    "nvim-tree/nvim-web-devicons",
     "s1n7ax/nvim-terminal",
 }
 
@@ -57,7 +60,7 @@ local misc = {
 -- Setup lazy.nvim
 require("lazy").setup({
     -- Add plugins here
-    colorscheme,
+    ui,
     lsp,
     navigation,
     git,
