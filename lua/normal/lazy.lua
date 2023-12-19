@@ -21,6 +21,7 @@ local ui = {
     --[[ "folke/noice.nvim",
     "MunifTanjim/nui.nvim", ]]
     "rcarriga/nvim-notify",
+    "akinsho/toggleterm.nvim",
 }
 
 local lsp = {
