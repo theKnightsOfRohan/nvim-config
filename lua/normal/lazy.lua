@@ -18,8 +18,8 @@ local ui = {
     "Th3Whit3Wolf/onebuddy",
     "nvim-lualine/lualine.nvim",
     "nvim-tree/nvim-web-devicons",
-    --[[ "folke/noice.nvim",
-    "MunifTanjim/nui.nvim", ]]
+    "folke/noice.nvim",
+    "MunifTanjim/nui.nvim",
     "rcarriga/nvim-notify",
     "akinsho/toggleterm.nvim",
 }
@@ -34,6 +34,13 @@ local lsp = {
     "williamboman/mason-lspconfig.nvim",
 }
 
+local dap = {
+    "mfussenegger/nvim-dap",
+    "rcarriga/nvim-dap-ui",
+    "theHamsta/nvim-dap-virtual-text",
+    "nvim-telescope/telescope-dap.nvim",
+}
+
 local navigation = {
     "nvim-telescope/telescope.nvim",
     "theprimeagen/harpoon",
@@ -42,8 +49,8 @@ local navigation = {
 
 local git = {
     "mhinz/vim-signify",
-    "tpope/vim-fugitive",
     "mbbill/undotree",
+    "kdheepak/lazygit.nvim",
 }
 
 local input = {
@@ -62,6 +69,7 @@ require("lazy").setup({
     -- Add plugins here
     ui,
     lsp,
+    dap,
     navigation,
     git,
     input,

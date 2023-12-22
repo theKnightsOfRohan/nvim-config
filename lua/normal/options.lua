@@ -2,6 +2,9 @@
 vim.g.mapleader = ";"
 vim.api.nvim_command('command! Q quitall')
 
+-- Window navigation
+vim.keymap.set("n", "<leader>m", function() vim.cmd("wincmd " .. string.char(vim.fn.getchar())) end)
+
 -- Copy and paste in different modes
 vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true })
 vim.api.nvim_set_keymap('v', '<C-v>', '"+p', { noremap = true })

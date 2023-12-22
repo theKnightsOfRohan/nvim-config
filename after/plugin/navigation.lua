@@ -6,8 +6,15 @@ end
 
 local harpoon = require("harpoon")
 
--- REQUIRED
-harpoon:setup({})
+harpoon:setup({
+    settings = {
+        save_on_toggle = true,
+        sync_on_ui_close = false,
+        key = function()
+            return vim.loop.cwd()
+        end,
+    }
+})
 
 vim.keymap.set("n", "<leader>h", function() harpoon:list():append() end)
 vim.keymap.set("n", "<C-h>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
@@ -18,7 +25,11 @@ vim.keymap.set("n", "<C-e>", function() harpoon:list():select(3) end)
 vim.keymap.set("n", "<C-r>", function() harpoon:list():select(4) end)
 
 -- UNDO TREE
-vim.keymap.set("n", "<leader>u", ":UndotreeToggle<CR>:UndotreeFocus<CR>")
+
+vim.keymap.set("n", "<leader>u", function()
+    vim.cmd("UndotreeToggle")
+    vim.cmd("UndotreeFocus")
+end);
 
 -- NVIM TREE
 
@@ -38,23 +49,18 @@ require("nvim-tree").setup({
     },
     filters = {
         dotfiles = false,
-        git_ignored = false,
+        -- git_ignored = false,
     },
 })
 
-vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeOpen);
-vim.keymap.set("n", "<leader>cv", vim.cmd.NvimTreeClose);
-
--- requires arg, so can't use above format
-vim.api.nvim_set_keymap('n', '<leader>f', ':wincmd l<CR>', { noremap = true })
+vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle);
 
 -- TELESCOPE
 
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
-vim.keymap.set("n", "<leader>gf", builtin.git_files, {})
+local telescope_builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>pf", telescope_builtin.find_files, {})
 vim.keymap.set("n", "<leader>ps", function()
-    builtin.grep_string({
-        search = vim.fn.input("Grep > ")
+    telescope_builtin.grep_string({
+        search = vim.fn.input("Search for: ")
     })
 end)
