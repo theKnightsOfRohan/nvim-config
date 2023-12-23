@@ -18,6 +18,8 @@ vim.api.nvim_set_keymap('i', '<C-v>', '<Esc>"+pi', { noremap = true })
 vim.keymap.set('n', '<leader>s', vim.cmd.write, { noremap = true })
 
 -- Visual mode bracket surround
+-- I need this because the autoclose.nvim plugin is only for insert mode
+-- It can sometimes be a little buggy, but that's what formatters are for
 local surrounders = {
     ["("] = ")",
     ["["] = "]",
@@ -41,6 +43,6 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.fillchars = { eob = " " }
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 20
 vim.opt.timeoutlen = 500
 vim.opt.updatetime = 100
