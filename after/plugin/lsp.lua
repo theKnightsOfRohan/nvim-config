@@ -24,6 +24,12 @@ cmp.setup({
         ['<C-CR>'] = cmp.mapping.complete(),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
     }),
+    sources = {
+        { name = 'nvim_lua' },
+        { name = 'nvim_lsp' },
+        { name = 'path' },
+        { name = 'luasnip' },
+    },
 })
 
 local telescope_builtin = require('telescope.builtin')

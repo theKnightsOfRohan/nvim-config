@@ -39,6 +39,8 @@ local lsp = {
     "neovim/nvim-lspconfig",
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-nvim-lua",
     "L3MON4D3/LuaSnip",
     "VonHeikemen/lsp-zero.nvim",
     "williamboman/mason.nvim",
@@ -82,10 +84,15 @@ local input = {
 -- Vim-be-good is a vim tutor
 -- Copilot is, well, GitHub Copilot
 -- Plenary is a dependency for a lot of plugins (Think of it as a standard library)
+-- Glow is a markdown previewer
 local misc = {
     "ThePrimeagen/vim-be-good",
     "github/copilot.vim",
     "nvim-lua/plenary.nvim",
+    "ellisonleao/glow.nvim",
+}
+
+local dev = {
 }
 
 -- Setup lazy.nvim
@@ -98,4 +105,5 @@ require("lazy").setup({
     git,
     input,
     misc,
+    dev,
 })
