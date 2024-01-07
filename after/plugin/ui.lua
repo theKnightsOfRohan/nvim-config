@@ -105,6 +105,9 @@ require('nvim-treesitter.configs').setup {
     },
 }
 
+-- Update all installed parsers on startup
+vim.cmd("TSUpdate")
+
 -- NOTIFY
 
 require("notify").setup({

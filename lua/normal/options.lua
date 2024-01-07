@@ -31,7 +31,7 @@ local surrounders = {
 }
 
 for k, v in pairs(surrounders) do
-    vim.api.nvim_set_keymap('v', k, 'c' .. k .. v .. '<Esc>hpi', { noremap = true })
+    vim.api.nvim_set_keymap('v', k, 'c' .. k .. v .. '<Esc>hpa', { noremap = true })
 end
 
 -- General settings
