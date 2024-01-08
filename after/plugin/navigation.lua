@@ -13,7 +13,7 @@ harpoon:setup({
         key = function()
             return vim.loop.cwd()
         end,
-    }
+    },
 })
 
 vim.keymap.set("n", "<leader>h", function() harpoon:list():append() end)
