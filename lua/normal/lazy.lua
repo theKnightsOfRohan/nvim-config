@@ -85,14 +85,17 @@ local input = {
 -- Copilot is, well, GitHub Copilot
 -- Plenary is a dependency for a lot of plugins (Think of it as a standard library)
 -- Glow is a markdown previewer
+-- Trouble displays a list of errors and warnings from the LSP
 local misc = {
     "ThePrimeagen/vim-be-good",
     "github/copilot.vim",
     "nvim-lua/plenary.nvim",
     "ellisonleao/glow.nvim",
+    "folke/trouble.nvim",
 }
 
 local dev = {
+    dir = "~/Documents/GitHub/harpoon_commander.nvim",
 }
 
 -- Setup lazy.nvim
