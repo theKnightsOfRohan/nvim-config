@@ -27,6 +27,8 @@ require("toggleterm").setup({
     },
 })
 
+vim.keymap.set('t', '<S-Esc>', [[<C-\><C-n>]])
+
 -- COLORSCHEME
 
 require('colorbuddy').colorscheme('onebuddy')
