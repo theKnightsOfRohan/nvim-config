@@ -3,8 +3,12 @@ if vim.g.vscode then
 end
 
 local lsp = require('lsp-zero')
+local jdtls = require('jdtls')
 
 lsp.preset("recommended")
+
+local root_markers = { ".gradle", "gradlew", ".git" }
+local root_dir = jdtls.setup.find_root(root_markers)
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -46,4 +50,6 @@ vim.diagnostic.config({
     signs = false,
 })
 
-lsp.setup()
+lsp.setup({
+    root_dir = root_dir,
+})

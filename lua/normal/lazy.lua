@@ -45,6 +45,7 @@ local lsp = {
     "VonHeikemen/lsp-zero.nvim",
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
+    "mfussenegger/nvim-jdtls",
 }
 
 -- Dap is the debugger
