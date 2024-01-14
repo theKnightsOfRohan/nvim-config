@@ -93,10 +93,11 @@ local misc = {
     "nvim-lua/plenary.nvim",
     "ellisonleao/glow.nvim",
     "folke/trouble.nvim",
+    "theKnightsOfRohan/csvlens.nvim",
 }
 
 local dev = {
-    dir = "~/Documents/GitHub/harpoon_commander.nvim",
+    -- dir = "~/Documents/GitHub/csvlens.nvim",
 }
 
 -- Setup lazy.nvim
