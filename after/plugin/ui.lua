@@ -27,11 +27,11 @@ require("toggleterm").setup({
     },
 })
 
-vim.keymap.set('t', '<C-Esc>', [[<C-\><C-n>]])
+vim.keymap.set("t", "<C-Esc>", [[<C-\><C-n>]])
 
 -- COLORSCHEME
 
-require('colorbuddy').colorscheme('onebuddy')
+require("colorbuddy").colorscheme("onebuddy")
 -- Makes the background transparent
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
@@ -48,19 +48,19 @@ require("nvim-web-devicons").set_icon({
         ["tsv"] = {
             icon = tsv_icon,
             color = tsv_color,
-            name = "tsv"
-        }
-    }
+            name = "tsv",
+        },
+    },
 })
 
 -- LUALINE
 
-require('lualine').setup {
+require("lualine").setup({
     options = {
         icons_enabled = true,
-        theme = 'codedark',
-        component_separators = { left = '|', right = '|' },
-        section_separators = { left = '', right = '' },
+        theme = "codedark",
+        component_separators = { left = "|", right = "|" },
+        section_separators = { left = "", right = "" },
         disabled_filetypes = {
             statusline = {},
             winbar = {},
@@ -72,35 +72,48 @@ require('lualine').setup {
             statusline = 1000,
             tabline = 1000,
             winbar = 1000,
-        }
+        },
     },
     sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diff', 'diagnostics' },
-        lualine_c = { 'filename' },
-        lualine_x = { 'filetype' },
-        lualine_y = { 'progress' },
-        lualine_z = { 'location' }
+        lualine_a = { "mode" },
+        lualine_b = { "branch", "diff", "diagnostics" },
+        lualine_c = { "filename" },
+        lualine_x = { "filetype" },
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
     },
     inactive_sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = { 'filename' },
-        lualine_x = { 'location' },
+        lualine_c = { "filename" },
+        lualine_x = { "location" },
         lualine_y = {},
-        lualine_z = {}
+        lualine_z = {},
     },
     tabline = {},
     winbar = {},
     inactive_winbar = {},
-    extensions = {}
-}
+    extensions = {},
+})
 
 -- TREESITTER
 
-require('nvim-treesitter.configs').setup {
+require("nvim-treesitter.configs").setup({
     -- A list of parser names, or "all" (the five listed parsers should always be installed)
-    ensure_installed = { "c", "c_sharp", "python", "lua", "vim", "vimdoc", "query", "java", "javascript", "typescript", "html", "markdown" },
+    ensure_installed = {
+        "c",
+        "c_sharp",
+        "python",
+        "lua",
+        "vim",
+        "vimdoc",
+        "query",
+        "java",
+        "javascript",
+        "typescript",
+        "html",
+        "markdown",
+    },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = true,
@@ -118,7 +131,7 @@ require('nvim-treesitter.configs').setup {
         -- Instead of true it can also be a list of languages
         additional_vim_regex_highlighting = false,
     },
-}
+})
 
 -- Update all installed parsers on startup
 vim.cmd("TSUpdate")
@@ -149,9 +162,9 @@ require("notify").setup({
 
 require("noice").setup({
     cmdline = {
-        enabled = true,         -- enables the Noice cmdline UI
-        view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
-        opts = {},              -- global options for the cmdline. See section on views
+        enabled = true, -- enables the Noice cmdline UI
+        view = "cmdline_popup", -- view for rendering the cmdline.
+        opts = {}, -- global options for the cmdline. See section on views
         ---@type table<string, CmdlineFormat>
         format = {
             -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
@@ -172,15 +185,15 @@ require("noice").setup({
     messages = {
         -- NOTE: If you enable messages, then the cmdline is enabled automatically.
         -- This is a current Neovim limitation.
-        enabled = true,              -- enables the Noice messages UI
-        view = "notify",             -- default view for messages
-        view_error = "notify",       -- view for errors
-        view_warn = "notify",        -- view for warnings
-        view_history = "messages",   -- view for :messages
+        enabled = true, -- enables the Noice messages UI
+        view = "notify", -- default view for messages
+        view_error = "notify", -- view for errors
+        view_warn = "notify", -- view for warnings
+        view_history = "messages", -- view for :messages
         view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
     },
     popupmenu = {
-        enabled = true,  -- enables the Noice popupmenu UI
+        enabled = true, -- enables the Noice popupmenu UI
         ---@type 'nui'|'cmp'
         backend = "cmp", -- backend to use to show regular cmdline completions
         ---@type NoicePopupmenuItemKind|false
@@ -207,7 +220,7 @@ require("noice").setup({
                     { error = true },
                     { warning = true },
                     { event = "msg_show", kind = { "" } },
-                    { event = "lsp",      kind = "message" },
+                    { event = "lsp", kind = "message" },
                 },
             },
         },
@@ -221,7 +234,7 @@ require("noice").setup({
                     { error = true },
                     { warning = true },
                     { event = "msg_show", kind = { "" } },
-                    { event = "lsp",      kind = "message" },
+                    { event = "lsp", kind = "message" },
                 },
             },
             filter_opts = { count = 1 },
@@ -267,9 +280,9 @@ require("noice").setup({
         hover = {
             enabled = true,
             silent = false, -- set to true to not show a message if hover is not available
-            view = nil,     -- when nil, use defaults from documentation
+            view = nil, -- when nil, use defaults from documentation
             ---@type NoiceViewOptions
-            opts = {},      -- merged with defaults from documentation
+            opts = {}, -- merged with defaults from documentation
         },
         signature = {
             enabled = true,
@@ -277,11 +290,11 @@ require("noice").setup({
                 enabled = true,
                 trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
                 luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
-                throttle = 50,  -- Debounce lsp signature help request by 50ms
+                throttle = 50, -- Debounce lsp signature help request by 50ms
             },
-            view = nil,         -- when nil, use defaults from documentation
+            view = nil, -- when nil, use defaults from documentation
             ---@type NoiceViewOptions
-            opts = {},          -- merged with defaults from documentation
+            opts = {}, -- merged with defaults from documentation
         },
         message = {
             -- Messages shown by lsp servers
@@ -304,7 +317,7 @@ require("noice").setup({
     },
     markdown = {
         hover = {
-            ["|(%S-)|"] = vim.cmd.help,                       -- vim help links
+            ["|(%S-)|"] = vim.cmd.help, -- vim help links
             ["%[.-%]%((%S-)%)"] = require("noice.util").open, -- markdown links
         },
         highlights = {
@@ -329,13 +342,13 @@ require("noice").setup({
     presets = {
         -- you can enable a preset by setting it to true, or a table that will override the preset config
         -- you can also add custom presets that you can enable/disable with enabled=true
-        bottom_search = false,         -- use a classic bottom cmdline for search
-        command_palette = false,       -- position the cmdline and popupmenu together
+        bottom_search = false, -- use a classic bottom cmdline for search
+        command_palette = false, -- position the cmdline and popupmenu together
         long_message_to_split = false, -- long messages will be sent to a split
-        inc_rename = false,            -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = true,         -- add a border to hover docs and signature help
+        inc_rename = false, -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = true, -- add a border to hover docs and signature help
     },
-    throttle = 1000 / 30,              -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
+    throttle = 1000 / 30, -- frequency of ui updates. no effect when in blocking mode.
     ---@type NoiceConfigViews
     views = {}, ---@see section on views
     ---@type NoiceRouteConfig[]

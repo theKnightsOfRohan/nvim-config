@@ -19,19 +19,19 @@ require("Comment").setup({
     ignore = nil,
     -- LHS of toggle mappings in NORMAL mode
     toggler = {
-        line = '<C-/>',
-        block = '<C-\\>',
+        line = "<C-/>",
+        block = "<C-\\>",
     },
     -- LHS of operator-pending mappings in NORMAL and VISUAL mode
     opleader = {
-        line = '<C-/>',
-        block = '<C-\\>',
+        line = "<C-/>",
+        block = "<C-\\>",
     },
     -- LHS of extra mappings
     extra = {
-        above = 'gcO',
-        below = 'gco',
-        eol = 'gcA',
+        above = "gcO",
+        below = "gco",
+        eol = "gcA",
     },
     -- Enable keybindings
     mappings = {

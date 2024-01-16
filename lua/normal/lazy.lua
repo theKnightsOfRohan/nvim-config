@@ -103,19 +103,17 @@ local dev = {
 
 -- Setup lazy.nvim
 require("lazy").setup({
-        -- Add plugins here
-        ui,
-        lsp,
-        dap,
-        navigation,
-        git,
-        input,
-        misc,
-        dev,
+    -- Add plugins here
+    ui,
+    lsp,
+    dap,
+    navigation,
+    git,
+    input,
+    misc,
+    dev,
+}, {
+    ui = {
+        border = "rounded",
     },
-    {
-        ui = {
-            border = "rounded",
-        },
-    }
-)
+})
