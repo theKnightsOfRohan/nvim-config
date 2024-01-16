@@ -40,6 +40,19 @@ vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
 -- Sets the neovim terminal colors to match the normal terminal colorscheme
 vim.opt.termguicolors = true
 
+-- ICONS
+
+local tsv_icon, tsv_color = require("nvim-web-devicons").get_icon_color_by_filetype("csv", {})
+require("nvim-web-devicons").set_icon({
+    override_by_extension = {
+        ["tsv"] = {
+            icon = tsv_icon,
+            color = tsv_color,
+            name = "tsv"
+        }
+    }
+})
+
 -- LUALINE
 
 require('lualine').setup {
