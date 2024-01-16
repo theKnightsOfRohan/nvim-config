@@ -2,10 +2,10 @@ if vim.g.vscode then
     return
 end
 
-local lsp = require('lsp-zero')
+local lsp_zero = require('lsp-zero')
 local jdtls = require('jdtls')
 
-lsp.preset("recommended")
+lsp_zero.preset("recommended")
 
 local root_markers = { ".gradle", "gradlew", ".git" }
 local root_dir = jdtls.setup.find_root(root_markers)
@@ -17,7 +17,7 @@ require('mason').setup({
 })
 require('mason-lspconfig').setup({
     handlers = {
-        lsp.default_setup,
+        lsp_zero.default_setup,
     },
 })
 
@@ -43,15 +43,15 @@ cmp.setup({
 
 local telescope_builtin = require('telescope.builtin')
 
-lsp.on_attach(function(client, bufnr)
+lsp_zero.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
     vim.keymap.set("n", "gr", function() telescope_builtin.lsp_references() end, opts)
     vim.keymap.set("n", "<leader>i", function() vim.lsp.buf.hover() end, opts)
-    lsp.buffer_autoformat() -- On write
+    lsp_zero.buffer_autoformat() -- On write
 end)
 
-require("lspconfig")["lua_ls"].setup({
+require("lspconfig").lua_ls.setup({
     settings = {
         Lua = {
             runtime = {
@@ -78,6 +78,4 @@ vim.diagnostic.config({
     signs = false,
 })
 
-lsp.setup({
-    root_dir = root_dir,
-})
+lsp_zero.setup()
