@@ -10,12 +10,17 @@ lsp.preset("recommended")
 local root_markers = { ".gradle", "gradlew", ".git" }
 local root_dir = jdtls.setup.find_root(root_markers)
 
-require('mason').setup({})
+require('mason').setup({
+    ui = {
+        border = "rounded",
+    }
+})
 require('mason-lspconfig').setup({
     handlers = {
         lsp.default_setup,
     },
 })
+
 
 local cmp = require('cmp')
 
@@ -45,6 +50,29 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>i", function() vim.lsp.buf.hover() end, opts)
     lsp.buffer_autoformat() -- On write
 end)
+
+require("lspconfig")["lua_ls"].setup({
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = "LuaJIT",
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { "vim" },
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("lua", true),
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+                enable = false,
+            },
+        },
+    },
+})
 
 vim.diagnostic.config({
     signs = false,

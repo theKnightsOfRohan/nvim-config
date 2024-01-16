@@ -12,7 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Treesitter basically is a code tokenizer
+-- Treesitter is a code tokenizer
 -- Colorbuddy is a color scheme helper
 -- Onebuddy is a color scheme
 -- Lualine makes my statusline look nice
@@ -102,13 +102,19 @@ local dev = {
 
 -- Setup lazy.nvim
 require("lazy").setup({
-    -- Add plugins here
-    ui,
-    lsp,
-    dap,
-    navigation,
-    git,
-    input,
-    misc,
-    dev,
-})
+        -- Add plugins here
+        ui,
+        lsp,
+        dap,
+        navigation,
+        git,
+        input,
+        misc,
+        dev,
+    },
+    {
+        ui = {
+            border = "rounded",
+        },
+    }
+)
