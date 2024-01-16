@@ -93,6 +93,7 @@ local misc = {
     "nvim-lua/plenary.nvim",
     "ellisonleao/glow.nvim",
     "folke/trouble.nvim",
+    "kawre/leetcode.nvim",
     -- "theKnightsOfRohan/csvlens.nvim",
 }
 
