@@ -79,4 +79,9 @@ vim.diagnostic.config({
     signs = false,
 })
 
-lsp_zero.setup()
+local root_markers = { ".git" }
+local root_dir = require("jdtls.setup").find_root(root_markers)
+
+lsp_zero.setup({
+    root_dir = root_dir,
+})
