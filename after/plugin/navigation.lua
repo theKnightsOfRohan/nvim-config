@@ -68,7 +68,7 @@ require("nvim-tree").setup({
 })
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle)
-vim.api.nvim_create_user_command("ToggleTreeIgnored", function()
+vim.api.nvim_create_user_command("TreeToggleIgnored", function()
     require("nvim-tree.api").tree.toggle_gitignore_filter()
 end, {})
 
