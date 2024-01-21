@@ -94,11 +94,11 @@ local misc = {
     "ellisonleao/glow.nvim",
     "folke/trouble.nvim",
     "kawre/leetcode.nvim",
-    -- "theKnightsOfRohan/csvlens.nvim",
+    "theKnightsOfRohan/csvlens.nvim",
 }
 
 local dev = {
-    dir = "~/Documents/GitHub/csvlens.nvim",
+    -- dir = "~/Documents/GitHub/csvlens.nvim",
 }
 
 -- Setup lazy.nvim

@@ -115,6 +115,8 @@ require("nvim-treesitter.configs").setup({
         "markdown",
     },
 
+    ignore_install = {},
+
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = true,
 
@@ -131,6 +133,8 @@ require("nvim-treesitter.configs").setup({
         -- Instead of true it can also be a list of languages
         additional_vim_regex_highlighting = false,
     },
+
+    modules = {},
 })
 
 -- Update all installed parsers on startup
@@ -163,7 +167,7 @@ require("notify").setup({
 require("noice").setup({
     cmdline = {
         enabled = true, -- enables the Noice cmdline UI
-        view = "cmdline_popup", -- view for rendering the cmdline.
+        view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
         opts = {}, -- global options for the cmdline. See section on views
         ---@type table<string, CmdlineFormat>
         format = {
@@ -271,11 +275,11 @@ require("noice").setup({
         },
         override = {
             -- override the default lsp markdown formatter with Noice
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = false,
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
             -- override the lsp markdown formatter with Noice
-            ["vim.lsp.util.stylize_markdown"] = false,
+            ["vim.lsp.util.stylize_markdown"] = true,
             -- override cmp documentation with Noice (needs the other options to work)
-            ["cmp.entry.get_documentation"] = false,
+            ["cmp.entry.get_documentation"] = true,
         },
         hover = {
             enabled = true,
@@ -348,7 +352,7 @@ require("noice").setup({
         inc_rename = false, -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = true, -- add a border to hover docs and signature help
     },
-    throttle = 1000 / 30, -- frequency of ui updates. no effect when in blocking mode.
+    throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
     ---@type NoiceConfigViews
     views = {}, ---@see section on views
     ---@type NoiceRouteConfig[]
