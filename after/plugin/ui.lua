@@ -31,7 +31,8 @@ vim.keymap.set("t", "<C-Esc>", [[<C-\><C-n>]])
 
 -- COLORSCHEME
 
-require("colorbuddy").colorscheme("onebuddy")
+vim.cmd("colorscheme onedark")
+
 -- Makes the background transparent
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })

@@ -23,8 +23,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Toggleterm is for creating persistent terminal buffers easily
 local ui = {
     "nvim-treesitter/nvim-treesitter",
-    "tjdevries/colorbuddy.vim",
-    "Th3Whit3Wolf/onebuddy",
+    "joshdick/onedark.vim",
     "nvim-lualine/lualine.nvim",
     "nvim-tree/nvim-web-devicons",
     "folke/noice.nvim",
@@ -87,6 +86,8 @@ local input = {
 -- Plenary is a dependency for a lot of plugins (Think of it as a standard library)
 -- Glow is a markdown previewer
 -- Trouble displays a list of errors and warnings from the LSP
+-- Leetcode is a leetcode plugin, so I can do leetcode in nvim
+-- Csvlens is a csv viewer, made by yours truly
 local misc = {
     "ThePrimeagen/vim-be-good",
     "github/copilot.vim",
@@ -99,6 +100,7 @@ local misc = {
 
 local dev = {
     -- dir = "~/Documents/GitHub/csvlens.nvim",
+    -- dir = "~/Documents/GitHub/harpoon",
 }
 
 -- Setup lazy.nvim

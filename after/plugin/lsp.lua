@@ -40,15 +40,38 @@ local telescope_builtin = require("telescope.builtin")
 
 lsp_zero.on_attach(function(_, bufnr)
     local opts = { buffer = bufnr, remap = false }
+
     vim.keymap.set("n", "gd", function()
         vim.lsp.buf.definition()
     end, opts)
+
     vim.keymap.set("n", "gr", function()
         telescope_builtin.lsp_references()
     end, opts)
+
     vim.keymap.set("n", "<leader>i", function()
         vim.lsp.buf.hover()
     end, opts)
+
+    vim.keymap.set("n", "<leader>r", function()
+        local cmd_id
+        cmd_id = vim.api.nvim_create_autocmd({ "CmdlineEnter" }, {
+            callback = function()
+                local key = vim.api.nvim_replace_termcodes("<C-f>", true, false, true)
+                vim.api.nvim_feedkeys(key, "c", false)
+                vim.api.nvim_feedkeys("0", "n", false)
+                cmd_id = nil
+                return true
+            end,
+        })
+        vim.lsp.buf.rename()
+        vim.defer_fn(function()
+            if cmd_id then
+                vim.api.nvim_del_autocmd(cmd_id)
+            end
+        end, 500)
+    end, opts)
+
     lsp_zero.buffer_autoformat() -- On write
 end)
 
