@@ -47,30 +47,60 @@ end)
 
 -- NVIM TREE
 
--- disable netrw to avoid conflicts
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
-require("nvim-tree").setup({
-    sort = {
-        sorter = "case_sensitive",
+require('triptych').setup({
+    mappings = {
+        -- Everything below is buffer-local, meaning it will only apply to Triptych windows
+        show_help = 'g?',
+        jump_to_cwd = '.', -- Pressing again will toggle back
+        nav_left = 'h',
+        nav_right = { 'l', '<CR>' },
+        delete = 'd',
+        add = 'a',
+        copy = 'c',
+        rename = 'r',
+        cut = 'x',
+        paste = 'p',
+        quit = 'q',
+        toggle_hidden = '<leader>.',
     },
-    view = {
-        width = 30,
+    extension_mappings = {},
+    options = {
+        dirs_first = true,
+        show_hidden = false,
+        line_numbers = {
+            enabled = true,
+            relative = false,
+        },
+        file_icons = {
+            enabled = true,
+            directory_icon = '',
+            fallback_file_icon = ''
+        },
+        column_widths = { .25, .25, .5 }, -- Must add up to 1 after rounding to 2 decimal places
+        highlights = {                    -- Highlight groups to use. See `:highlight` or `:h highlight`
+            file_names = 'NONE',
+            directory_names = 'NONE',
+        },
+        syntax_highlighting = { -- Applies to file previews
+            enabled = true,
+            debounce_ms = 100,
+        },
     },
-    renderer = {
-        group_empty = true,
+    git_signs = {
+        enabled = true,
+        signs = {
+            add = '+',
+            modify = '~',
+            rename = 'r',
+            untracked = '?',
+        },
     },
-    filters = {
-        dotfiles = false,
-        -- git_ignored = false,
-    },
+    diagnostic_signs = {
+        enabled = true,
+    }
 })
 
-vim.keymap.set("n", "<leader>pv", vim.cmd.NvimTreeToggle)
-vim.api.nvim_create_user_command("TreeToggleIgnored", function()
-    require("nvim-tree.api").tree.toggle_gitignore_filter()
-end, {})
+vim.keymap.set('n', '<leader>pv', vim.cmd.Triptych, { silent = true })
 
 -- TELESCOPE
 

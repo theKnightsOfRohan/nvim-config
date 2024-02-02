@@ -62,7 +62,7 @@ local dap = {
 local navigation = {
     "nvim-telescope/telescope.nvim",
     "theprimeagen/harpoon",
-    "nvim-tree/nvim-tree.lua",
+    "simonmclean/triptych.nvim"
 }
 
 -- Signify is for git diffing on the statusline
