@@ -58,7 +58,7 @@ local dap = {
 
 -- Telescope is a fuzzy finder, so it's less exact
 -- Harpoon is a bookmarking plugin
--- Nvim-tree is a file explorer
+-- Triptych is a navigation plugin
 local navigation = {
     "nvim-telescope/telescope.nvim",
     "theprimeagen/harpoon",
