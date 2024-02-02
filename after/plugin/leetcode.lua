@@ -1,3 +1,7 @@
+if vim.g.vscode then
+    return
+end
+
 require("leetcode").setup({
     ---@type string
     arg = "leetcode.nvim",
