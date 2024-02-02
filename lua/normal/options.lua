@@ -4,16 +4,16 @@ vim.api.nvim_command("command! Q quitall")
 
 -- Window navigation
 vim.keymap.set("n", "<S-Up>", function()
-    vim.cmd("wincmd k")
+    vim.cmd.wincmd({ args = { "k" } })
 end)
 vim.keymap.set("n", "<S-Down>", function()
-    vim.cmd("wincmd j")
+    vim.cmd.wincmd({ args = { "j" } })
 end)
 vim.keymap.set("n", "<S-Left>", function()
-    vim.cmd("wincmd h")
+    vim.cmd.wincmd({ args = { "h" } })
 end)
 vim.keymap.set("n", "<S-Right>", function()
-    vim.cmd("wincmd l")
+    vim.cmd.wincmd({ args = { "l" } })
 end)
 
 -- Copy and paste in different modes

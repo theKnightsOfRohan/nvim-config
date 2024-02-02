@@ -31,7 +31,7 @@ vim.keymap.set("t", "<C-Esc>", [[<C-\><C-n>]])
 
 -- COLORSCHEME
 
-vim.cmd("colorscheme onedark")
+vim.cmd.colorscheme({ args = { "onedark" } })
 
 -- Makes the background transparent
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -140,7 +140,7 @@ require("nvim-treesitter.configs").setup({
 })
 
 -- Update all installed parsers on startup
-vim.cmd("TSUpdate")
+vim.cmd.TSUpdate()
 
 -- NOTIFY
 
