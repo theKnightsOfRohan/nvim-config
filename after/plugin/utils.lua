@@ -39,6 +39,3 @@ end)
 -- CSVLENS
 
 require("csvlens").setup()
-
--- LIVE-SERVER
-require('live-server').setup()

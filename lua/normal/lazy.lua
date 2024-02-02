@@ -96,7 +96,6 @@ local misc = {
     "folke/trouble.nvim",
     "kawre/leetcode.nvim",
     "theKnightsOfRohan/csvlens.nvim",
-    "barrett-ruth/live-server.nvim",
 }
 
 local dev = {
