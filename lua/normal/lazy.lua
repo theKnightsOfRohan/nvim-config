@@ -101,6 +101,7 @@ local misc = {
 local dev = {
     -- dir = "~/Documents/GitHub/csvlens.nvim",
     -- dir = "~/Documents/GitHub/harpoon",
+    -- dir = "~/Documents/GitHub/triptych.nvim"
 }
 
 -- Setup lazy.nvim

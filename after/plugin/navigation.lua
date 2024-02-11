@@ -45,7 +45,7 @@ vim.keymap.set("n", "<leader>u", function()
     vim.cmd.UndotreeFocus()
 end)
 
--- NVIM TREE
+-- TRIPTYCH
 
 require('triptych').setup({
     mappings = {
@@ -89,10 +89,10 @@ require('triptych').setup({
     git_signs = {
         enabled = true,
         signs = {
-            add = '+',
-            modify = '~',
-            rename = 'r',
-            untracked = '?',
+            add = { text = '+', texthl = "SignifySignAdd" },
+            modify = { text = '~', texthl = "SignifySignChange" },
+            rename = { text = 'r', texthl = "SignifySignChange" },
+            untracked = { text = '?', texthl = "SignifySignDelete" },
         },
     },
     diagnostic_signs = {
