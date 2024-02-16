@@ -45,6 +45,7 @@ local lsp = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "mfussenegger/nvim-jdtls",
+    "apple/pkl-neovim",
 }
 
 -- Dap is the debugger
@@ -62,7 +63,7 @@ local dap = {
 local navigation = {
     "nvim-telescope/telescope.nvim",
     "theprimeagen/harpoon",
-    "simonmclean/triptych.nvim"
+    "simonmclean/triptych.nvim",
 }
 
 -- Signify is for git diffing on the statusline
