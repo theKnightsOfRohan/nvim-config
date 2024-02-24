@@ -11,7 +11,7 @@ require("glow").setup({
     glow_path = "/opt/homebrew/bin/glow",
     border = "rounded", -- floating window border config
     pager = false,
-    width_ratio = 0.7, -- maximum width of the Glow window compared to the nvim window size
+    width_ratio = 0.7,  -- maximum width of the Glow window compared to the nvim window size
     height_ratio = 0.7,
 })
 
@@ -23,7 +23,7 @@ end)
 vim.keymap.set("n", "<leader>xw", function()
     require("trouble").toggle("workspace_diagnostics")
 end)
-vim.keymap.set("n", "<leader>xd", function()
+vim.keymap.set("n", "<leader>xf", function()
     require("trouble").toggle("document_diagnostics")
 end)
 vim.keymap.set("n", "<leader>xq", function()
@@ -38,4 +38,8 @@ end)
 
 -- CSVLENS
 
-require("csvlens").setup()
+require("csvlens").setup({})
+
+-- AUTO-SESSION
+
+require("auto-session").setup()

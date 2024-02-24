@@ -46,6 +46,7 @@ local lsp = {
     "williamboman/mason-lspconfig.nvim",
     "mfussenegger/nvim-jdtls",
     "apple/pkl-neovim",
+    "artemave/workspace-diagnostics.nvim",
 }
 
 -- Dap is the debugger
@@ -80,6 +81,7 @@ local git = {
 local input = {
     "m4xshen/autoclose.nvim",
     "numToStr/Comment.nvim",
+    "github/copilot.vim",
 }
 
 -- Vim-be-good is a vim tutor
@@ -91,12 +93,12 @@ local input = {
 -- Csvlens is a csv viewer, made by yours truly
 local misc = {
     "ThePrimeagen/vim-be-good",
-    "github/copilot.vim",
     "nvim-lua/plenary.nvim",
     "ellisonleao/glow.nvim",
     "folke/trouble.nvim",
     "kawre/leetcode.nvim",
     "theKnightsOfRohan/csvlens.nvim",
+    "rmagatti/auto-session",
 }
 
 local dev = {

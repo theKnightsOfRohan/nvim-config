@@ -37,8 +37,37 @@ cmp.setup({
 })
 
 local telescope_builtin = require("telescope.builtin")
+require("workspace-diagnostics").setup()
+local lsp_filetypes = {
+    "lua",
+    "typescript",
+    "javascript",
+    "typescriptreact",
+    "javascriptreact",
+    "json",
+    "yaml",
+    "html",
+    "css",
+    "scss",
+    "markdown",
+    "java",
+    "python",
+    "make",
+    "text",
+    "sh",
+}
 
-lsp_zero.on_attach(function(_, bufnr)
+table.contains = function(t, value)
+    for _, v in pairs(t) do
+        if v == value then
+            return true
+        end
+    end
+
+    return false
+end
+
+lsp_zero.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
 
     vim.keymap.set("n", "gd", function()
@@ -73,6 +102,10 @@ lsp_zero.on_attach(function(_, bufnr)
     end, opts)
 
     lsp_zero.buffer_autoformat() -- On write
+
+    if table.contains(lsp_filetypes, vim.bo.filetype) ~= false then
+        require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+    end
 end)
 
 require("lspconfig").lua_ls.setup({
