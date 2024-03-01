@@ -137,6 +137,10 @@ require("nvim-treesitter.configs").setup({
         additional_vim_regex_highlighting = false,
     },
 
+    indent = {
+        enable = true,
+    },
+
     modules = {},
 })
 
@@ -264,7 +268,7 @@ require("noice").setup({
         -- event is always "notify" and kind can be any log level as a string
         -- The default routes will forward notifications to nvim-notify
         -- Benefit of using Noice for this is the routing and consistent history view
-        enabled = true,
+        enabled = false,
         view = "notify",
     },
     lsp = {

@@ -46,7 +46,6 @@ local lsp = {
     "williamboman/mason-lspconfig.nvim",
     "mfussenegger/nvim-jdtls",
     "apple/pkl-neovim",
-    "artemave/workspace-diagnostics.nvim",
 }
 
 -- Dap is the debugger
@@ -96,7 +95,6 @@ local misc = {
     "nvim-lua/plenary.nvim",
     "ellisonleao/glow.nvim",
     "folke/trouble.nvim",
-    "kawre/leetcode.nvim",
     "theKnightsOfRohan/csvlens.nvim",
     "rmagatti/auto-session",
 }

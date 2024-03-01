@@ -37,34 +37,17 @@ cmp.setup({
 })
 
 local telescope_builtin = require("telescope.builtin")
-require("workspace-diagnostics").setup()
-local lsp_filetypes = {
-    "lua",
-    "typescript",
-    "javascript",
-    "typescriptreact",
-    "javascriptreact",
-    "json",
-    "yaml",
-    "html",
-    "css",
-    "scss",
-    "markdown",
-    "java",
-    "python",
-    "make",
-    "text",
-    "sh",
-}
 
-table.contains = function(t, value)
-    for _, v in pairs(t) do
-        if v == value then
-            return true
-        end
+-- See https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
+local notify = vim.notify
+---@param msg string
+---@param ... any
+vim.notify = function(msg, ...)
+    if msg:match("warning: multiple different client offset_encodings detected for buffer, this is not supported yet") then
+        return
     end
 
-    return false
+    notify(msg, ...)
 end
 
 lsp_zero.on_attach(function(client, bufnr)
@@ -101,11 +84,14 @@ lsp_zero.on_attach(function(client, bufnr)
         end, 500)
     end, opts)
 
-    lsp_zero.buffer_autoformat() -- On write
+    vim.keymap.set("n", "<leader>f", function()
+        vim.lsp.buf.code_action({
+            filter = function(a) return a.isPreferred end,
+            apply = true
+        })
+    end, opts)
 
-    if table.contains(lsp_filetypes, vim.bo.filetype) ~= false then
-        require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-    end
+    lsp_zero.buffer_autoformat() -- On write
 end)
 
 require("lspconfig").lua_ls.setup({
