@@ -12,15 +12,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Treesitter is a code tokenizer
--- Colorbuddy is a color scheme helper
--- Onebuddy is a color scheme
--- Lualine makes my statusline look nice
--- Nvim-web-devicons is for icons
--- Noice improves the UI so I don't constantly look down
--- Nui is a UI library
--- Nvim-notify is for notification popups
--- Toggleterm is for creating persistent terminal buffers easily
 local ui = {
     "nvim-treesitter/nvim-treesitter",
     "joshdick/onedark.vim",
@@ -32,8 +23,6 @@ local ui = {
     "akinsho/toggleterm.nvim",
 }
 
--- Lsp-Zero is the base for my LSP setup
--- The rest of these plugins are what lsp-zero configures
 local lsp = {
     "neovim/nvim-lspconfig",
     "hrsh7th/nvim-cmp",
@@ -48,8 +37,6 @@ local lsp = {
     "apple/pkl-neovim",
 }
 
--- Dap is the debugger
--- Right now it doesn't work :P
 local dap = {
     "mfussenegger/nvim-dap",
     "rcarriga/nvim-dap-ui",
@@ -57,39 +44,24 @@ local dap = {
     "nvim-telescope/telescope-dap.nvim",
 }
 
--- Telescope is a fuzzy finder, so it's less exact
--- Harpoon is a bookmarking plugin
--- Triptych is a navigation plugin
 local navigation = {
     "nvim-telescope/telescope.nvim",
     "theprimeagen/harpoon",
     "simonmclean/triptych.nvim",
 }
 
--- Signify is for git diffing on the statusline
--- Undotree is for visualizing the tree of changes in an nvim session
--- Lazygit is a git client (not nvim specific, this is just integration)
 local git = {
     "mhinz/vim-signify",
     "mbbill/undotree",
     "kdheepak/lazygit.nvim",
 }
 
--- Autoclose is for automatically closing brackets
--- Comment is for commenting out lines with a keybind
 local input = {
     "m4xshen/autoclose.nvim",
     "numToStr/Comment.nvim",
     "github/copilot.vim",
 }
 
--- Vim-be-good is a vim tutor
--- Copilot is, well, GitHub Copilot
--- Plenary is a dependency for a lot of plugins (Think of it as a standard library)
--- Glow is a markdown previewer
--- Trouble displays a list of errors and warnings from the LSP
--- Leetcode is a leetcode plugin, so I can do leetcode in nvim
--- Csvlens is a csv viewer, made by yours truly
 local misc = {
     "ThePrimeagen/vim-be-good",
     "nvim-lua/plenary.nvim",
@@ -105,9 +77,7 @@ local dev = {
     -- dir = "~/Documents/GitHub/triptych.nvim"
 }
 
--- Setup lazy.nvim
 require("lazy").setup({
-    -- Add plugins here
     ui,
     lsp,
     dap,
