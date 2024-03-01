@@ -28,7 +28,6 @@ vim.keymap.set("n", "<leader>s", vim.cmd.write, { noremap = true })
 local surrounders = {
     ["("] = ")",
     ["["] = "]",
-    ["{"] = "}",
     ["'"] = "'",
     ['"'] = '"',
     ["`"] = "`",
@@ -36,8 +35,10 @@ local surrounders = {
 }
 
 for open, close in pairs(surrounders) do
-    vim.api.nvim_set_keymap("v", open, "c" .. open .. close .. "<Esc>hpa", { noremap = true })
+    vim.api.nvim_set_keymap("v", open, "c" .. open .. close .. "<Esc>hp", { noremap = true })
 end
+
+vim.api.nvim_set_keymap("v", "{", "c" .. "{}<Left><CR><Up><Esc>pi<Tab><Esc>", { noremap = true })
 
 -- General settings
 vim.opt.number = true
