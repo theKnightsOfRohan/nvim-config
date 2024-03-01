@@ -16,11 +16,8 @@ vim.keymap.set("n", "<S-Right>", function()
     vim.cmd.wincmd({ args = { "l" } })
 end)
 
--- Copy and paste in different modes
+-- Copy highlighted selection
 vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true })
-vim.api.nvim_set_keymap("v", "<C-v>", '"+p', { noremap = true })
-vim.api.nvim_set_keymap("n", "<C-v>", '"+p', { noremap = true })
-vim.api.nvim_set_keymap("i", "<C-v>", '<Esc>"+pi', { noremap = true })
 
 -- Quick save
 vim.keymap.set("n", "<leader>s", vim.cmd.write, { noremap = true })
