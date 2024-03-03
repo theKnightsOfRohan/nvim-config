@@ -43,14 +43,16 @@ local notify = vim.notify
 ---@param msg string
 ---@param ... any
 vim.notify = function(msg, ...)
-    if msg:match("warning: multiple different client offset_encodings detected for buffer, this is not supported yet") then
+    if
+        msg:match("warning: multiple different client offset_encodings detected for buffer, this is not supported yet")
+    then
         return
     end
 
     notify(msg, ...)
 end
 
-lsp_zero.on_attach(function(client, bufnr)
+lsp_zero.on_attach(function(_, bufnr)
     local opts = { buffer = bufnr, remap = false }
 
     vim.keymap.set("n", "gd", function()
@@ -86,8 +88,10 @@ lsp_zero.on_attach(function(client, bufnr)
 
     vim.keymap.set("n", "<leader>f", function()
         vim.lsp.buf.code_action({
-            filter = function(a) return a.isPreferred end,
-            apply = true
+            filter = function(a)
+                return a.isPreferred
+            end,
+            apply = true,
         })
     end, opts)
 
@@ -121,9 +125,4 @@ vim.diagnostic.config({
     signs = false,
 })
 
-local root_markers = { ".git" }
-local root_dir = require("jdtls.setup").find_root(root_markers)
-
-lsp_zero.setup({
-    root_dir = root_dir,
-})
+lsp_zero.setup()
