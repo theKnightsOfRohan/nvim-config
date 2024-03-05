@@ -4,23 +4,26 @@ vim.api.nvim_command("command! Q quitall")
 
 -- Window navigation
 vim.keymap.set("n", "<S-Up>", function()
-    vim.cmd.wincmd({ args = { "k" } })
+    vim.cmd("wincmd k")
 end)
 vim.keymap.set("n", "<S-Down>", function()
-    vim.cmd.wincmd({ args = { "j" } })
+    vim.cmd("wincmd j")
 end)
 vim.keymap.set("n", "<S-Left>", function()
-    vim.cmd.wincmd({ args = { "h" } })
+    vim.cmd("wincmd h")
 end)
 vim.keymap.set("n", "<S-Right>", function()
-    vim.cmd.wincmd({ args = { "l" } })
+    vim.cmd("wincmd l")
 end)
 
 -- Copy highlighted selection
 vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true })
 
 -- Quick save
-vim.keymap.set("n", "<leader>s", vim.cmd.write, { noremap = true })
+vim.keymap.set("n", "<leader>s", function()
+    vim.lsp.buf.format()
+    vim.cmd.write()
+end, { noremap = true })
 
 -- Visual mode bracket surround
 -- I need this because the autoclose.nvim plugin is only for insert mode
@@ -38,7 +41,7 @@ for open, close in pairs(surrounders) do
     vim.api.nvim_set_keymap("v", open, "c" .. open .. close .. "<Esc>hp", { noremap = true })
 end
 
-vim.api.nvim_set_keymap("v", "{", "c" .. "{}<Left><CR><Up><Esc>pi<Tab><Esc>", { noremap = true })
+vim.api.nvim_set_keymap("v", "{", "c" .. "{}<Left><CR><Up><Esc>o<Esc>p>>h", { noremap = true })
 
 -- General settings
 vim.opt.number = true

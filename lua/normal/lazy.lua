@@ -66,7 +66,6 @@ local misc = {
     "ThePrimeagen/vim-be-good",
     "nvim-lua/plenary.nvim",
     "ellisonleao/glow.nvim",
-    "folke/trouble.nvim",
     "theKnightsOfRohan/csvlens.nvim",
     "rmagatti/auto-session",
 }
@@ -75,6 +74,7 @@ local dev = {
     -- dir = "~/Documents/GitHub/csvlens.nvim",
     -- dir = "~/Documents/GitHub/harpoon",
     -- dir = "~/Documents/GitHub/triptych.nvim"
+    -- dir = "~/Documents/GitHub/pkl-neovim",
 }
 
 require("lazy").setup({

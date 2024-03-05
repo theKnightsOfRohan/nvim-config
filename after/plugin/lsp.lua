@@ -94,8 +94,6 @@ lsp_zero.on_attach(function(_, bufnr)
             apply = true,
         })
     end, opts)
-
-    lsp_zero.buffer_autoformat() -- On write
 end)
 
 require("lspconfig").lua_ls.setup({
@@ -111,7 +109,10 @@ require("lspconfig").lua_ls.setup({
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true),
+                library = {
+                    '${3rd}/luv/library',
+                    unpack(vim.api.nvim_get_runtime_file('', true)),
+                }
             },
             -- Do not send telemetry data containing a randomized but unique identifier
             telemetry = {
