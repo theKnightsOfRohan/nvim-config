@@ -68,22 +68,7 @@ lsp_zero.on_attach(function(_, bufnr)
     end, opts)
 
     vim.keymap.set("n", "<leader>r", function()
-        local cmd_id
-        cmd_id = vim.api.nvim_create_autocmd({ "CmdlineEnter" }, {
-            callback = function()
-                local key = vim.api.nvim_replace_termcodes("<C-f>", true, false, true)
-                vim.api.nvim_feedkeys(key, "c", false)
-                vim.api.nvim_feedkeys("0", "n", false)
-                cmd_id = nil
-                return true
-            end,
-        })
         vim.lsp.buf.rename()
-        vim.defer_fn(function()
-            if cmd_id then
-                vim.api.nvim_del_autocmd(cmd_id)
-            end
-        end, 500)
     end, opts)
 
     vim.keymap.set("n", "<leader>f", function()

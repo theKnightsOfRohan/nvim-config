@@ -18,7 +18,7 @@ vim.keymap.set("n", "<S-Right>", function()
     vim.cmd("wincmd l")
 end)
 
--- Copy highlighted selection
+-- Copy highlighted selection to clipboard
 vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
 
 -- Quick save
