@@ -6,7 +6,7 @@ vim.api.nvim_set_keymap("i", ";;", "<Esc>$a;", { noremap = true, silent = true }
 
 -- Window navigation
 for _, dir in ipairs({ "h", "j", "k", "l" }) do
-    vim.keymap.set("n", "<S-" .. dir .. ">", function()
+    vim.keymap.set("n", string.format("<S-%s>", dir), function()
         vim.cmd("wincmd " .. dir)
     end)
 end
@@ -38,20 +38,23 @@ end
 
 vim.api.nvim_set_keymap("v", "{", "c" .. "{}<Left><CR><Up><Esc>o<Esc>ph", { noremap = true, silent = true })
 
-vim.api.nvim_create_autocmd('TextYankPost', {
-    group = vim.api.nvim_create_augroup('TextYankPost', {}),
-    pattern = '*',
+vim.api.nvim_create_autocmd("TextYankPost", {
+    group = vim.api.nvim_create_augroup("TextYankPost", {}),
+    pattern = "*",
     callback = function()
         vim.highlight.on_yank({
-            higroup = 'IncSearch',
+            higroup = "IncSearch",
             timeout = 100,
         })
     end,
 })
 
-
 vim.api.nvim_set_keymap("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+
+vim.api.nvim_create_user_command("Preview", function()
+    vim.api.nvim_command("silent !open " .. vim.fn.expand("%:p"))
+end, {})
 
 -- General settings
 vim.opt.number = true
@@ -65,4 +68,7 @@ vim.opt.fillchars = { eob = " " }
 vim.opt.scrolloff = 20
 vim.opt.timeoutlen = 500
 vim.opt.updatetime = 100
+vim.opt.swapfile = false
+vim.opt.hidden = true
+vim.opt.termguicolors = true
 vim.g.netrw_banner = 0
