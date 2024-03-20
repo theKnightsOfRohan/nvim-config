@@ -68,13 +68,15 @@ local misc = {
     "ellisonleao/glow.nvim",
     "theKnightsOfRohan/csvlens.nvim",
     "rmagatti/auto-session",
+    "tamton-aquib/keys.nvim",
 }
 
 local dev = {
     -- dir = "~/Documents/GitHub/csvlens.nvim",
     -- dir = "~/Documents/GitHub/harpoon",
-    -- dir = "~/Documents/GitHub/triptych.nvim"
+    -- dir = "~/Documents/GitHub/triptych.nvim",
     -- dir = "~/Documents/GitHub/pkl-neovim",
+    dir = "~/Documents/GitHub/venison.nvim"
 }
 
 require("lazy").setup({

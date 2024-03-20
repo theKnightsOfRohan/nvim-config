@@ -79,6 +79,10 @@ lsp_zero.on_attach(function(_, bufnr)
             apply = true,
         })
     end, opts)
+
+    vim.keymap.set("n", "<leader>xx", function()
+        telescope_builtin.diagnostics()
+    end, opts)
 end)
 
 require("lspconfig").lua_ls.setup({

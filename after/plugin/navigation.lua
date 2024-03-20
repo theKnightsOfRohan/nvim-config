@@ -77,7 +77,7 @@ require("triptych").setup({
             fallback_file_icon = "",
         },
         column_widths = { 0.25, 0.25, 0.5 }, -- Must add up to 1 after rounding to 2 decimal places
-        highlights = { -- Highlight groups to use. See `:highlight` or `:h highlight`
+        highlights = {                       -- Highlight groups to use. See `:highlight` or `:h highlight`
             file_names = "NONE",
             directory_names = "NONE",
         },
@@ -107,3 +107,4 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Triptych, { silent = true })
 local telescope_builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>pf", telescope_builtin.find_files, {})
 vim.keymap.set("n", "<leader>ps", telescope_builtin.live_grep, {})
+vim.keymap.set("n", "<leader>h", telescope_builtin.help_tags, {})

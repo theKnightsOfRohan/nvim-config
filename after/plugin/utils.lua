@@ -17,8 +17,21 @@ require("glow").setup({
 
 -- CSVLENS
 
-require("csvlens").setup({})
+require("csvlens").setup({
+    direction = "float",
+    exec_path = "/opt/homebrew/bin/csvlens",
+    exec_install_path = vim.fn.stdpath("data") .. "/csvlens.nvim/",
+})
 
 -- AUTO-SESSION
 
 require("auto-session").setup({})
+
+-- KEYS
+require("keys").setup({
+    enable_on_startup = false,
+    win_opts = {
+        width = 20,
+        height = 3,
+    }
+})

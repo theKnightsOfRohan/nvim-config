@@ -5,18 +5,11 @@ vim.api.nvim_command("command! Q quitall")
 vim.api.nvim_set_keymap("i", ";;", "<Esc>$a;", { noremap = true, silent = true })
 
 -- Window navigation
-vim.keymap.set("n", "<S-Up>", function()
-    vim.cmd("wincmd k")
-end)
-vim.keymap.set("n", "<S-Down>", function()
-    vim.cmd("wincmd j")
-end)
-vim.keymap.set("n", "<S-Left>", function()
-    vim.cmd("wincmd h")
-end)
-vim.keymap.set("n", "<S-Right>", function()
-    vim.cmd("wincmd l")
-end)
+for _, dir in ipairs({ "h", "j", "k", "l" }) do
+    vim.keymap.set("n", "<S-" .. dir .. ">", function()
+        vim.cmd("wincmd " .. dir)
+    end)
+end
 
 -- Copy highlighted selection to clipboard
 vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
