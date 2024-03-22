@@ -17,7 +17,7 @@ return {
                 "typescript",
                 "html",
                 "markdown",
-                "pkl",
+                "make",
             },
 
             ignore_install = {},

@@ -10,6 +10,7 @@ return {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
     },
+    event = "VeryLazy",
     config = function()
         local lsp_zero = require("lsp-zero")
 
