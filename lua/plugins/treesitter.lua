@@ -18,6 +18,7 @@ return {
                 "html",
                 "markdown",
                 "make",
+                "zig",
             },
 
             ignore_install = {},

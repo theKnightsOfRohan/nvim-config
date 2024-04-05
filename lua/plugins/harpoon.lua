@@ -18,13 +18,12 @@ return {
         })
 
         vim.keymap.set("n", "<leader>h", function()
-            harpoon:list():append()
+            harpoon:list():add()
         end)
-        vim.keymap.set("n", "<C-h>", function()
+        vim.keymap.set("n", "<leader>ht", function()
             harpoon.ui:toggle_quick_menu(harpoon:list())
         end)
 
-        -- Yes, yes, I'm on qwerty, so sue me
         -- TODO: Figure out how to turn this into numbers
         vim.keymap.set("n", "<C-q>", function()
             harpoon:list():select(1)
