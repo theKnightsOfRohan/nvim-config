@@ -1,11 +1,13 @@
 return {
-    "simonmclean/triptych.nvim",
+    -- "simonmclean/triptych.nvim",
+    dir = "~/Documents/GitHub/triptych.nvim",
     event = "VeryLazy",
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-tree/nvim-web-devicons",
         "mhinz/vim-signify",
     },
+    branch = "async",
     config = function()
         require("triptych").setup({
             mappings = {
@@ -37,7 +39,7 @@ return {
                     fallback_file_icon = "",
                 },
                 column_widths = { 0.25, 0.25, 0.5 }, -- Must add up to 1 after rounding to 2 decimal places
-                highlights = { -- Highlight groups to use. See `:highlight` or `:h highlight`
+                highlights = {                       -- Highlight groups to use. See `:highlight` or `:h highlight`
                     file_names = "NONE",
                     directory_names = "NONE",
                 },

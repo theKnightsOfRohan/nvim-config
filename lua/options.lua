@@ -36,7 +36,7 @@ vim.keymap.set("n", "<leader>s", function()
     vim.cmd.write()
     vim.lsp.buf.format()
     vim.cmd.write()
-    vim.diagnostic.show()
+    vim.diagnostic.show(nil, 0)
 end, { noremap = true, silent = true })
 
 -- Visual mode bracket surround
@@ -55,7 +55,7 @@ for open, close in pairs(surrounders) do
     vim.api.nvim_set_keymap("v", open, "c" .. open .. close .. "<Esc>hp", { noremap = true, silent = true })
 end
 
-vim.api.nvim_set_keymap("v", "{", "c" .. "{}<Left><CR><Up><Esc>o<Esc>ph", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "{", "c{}<Left><CR><Up><Esc>ph==", { noremap = true, silent = true })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = vim.api.nvim_create_augroup("TextYankPost", {}),

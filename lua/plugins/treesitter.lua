@@ -1,13 +1,17 @@
 return {
-    "nvim-treesitter/nvim-treesitter",
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+    },
+    build = function()
+        vim.cmd.TSUpdate()
+    end,
     config = function()
         require("nvim-treesitter.configs").setup({
             -- A list of parser names, or "all" (the five listed parsers should always be installed)
             ensure_installed = {
                 "c",
                 "cpp",
-                "c_sharp",
-                "python",
                 "lua",
                 "vim",
                 "vimdoc",
@@ -18,13 +22,12 @@ return {
                 "html",
                 "markdown",
                 "make",
-                "zig",
             },
 
             ignore_install = {},
 
             -- Install parsers synchronously (only applied to `ensure_installed`)
-            sync_install = true,
+            sync_install = false,
 
             -- Automatically install missing parsers when entering buffer
             -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
@@ -45,8 +48,17 @@ return {
             },
 
             modules = {},
-        })
 
-        vim.cmd.TSUpdate()
+            textobjects = {
+                select = {
+                    enable = true,
+                    lookahead = true,
+                    keymaps = {
+                        ["af"] = "@function.outer",
+                        ["if"] = "@function.inner",
+                    },
+                },
+            },
+        })
     end,
 }
