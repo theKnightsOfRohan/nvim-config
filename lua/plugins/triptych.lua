@@ -1,13 +1,11 @@
 return {
-    -- "simonmclean/triptych.nvim",
-    dir = "~/Documents/GitHub/triptych.nvim",
+    "simonmclean/triptych.nvim",
     event = "VeryLazy",
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-tree/nvim-web-devicons",
         "mhinz/vim-signify",
     },
-    branch = "async",
     config = function()
         require("triptych").setup({
             mappings = {
