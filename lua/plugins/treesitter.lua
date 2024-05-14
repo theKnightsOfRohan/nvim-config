@@ -21,7 +21,9 @@ return {
                 "typescript",
                 "html",
                 "markdown",
+                "markdown_inline",
                 "make",
+                "regex",
             },
 
             ignore_install = {},

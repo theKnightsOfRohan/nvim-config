@@ -20,6 +20,8 @@ return {
                     border = "Normal",
                     background = "Normal",
                 },
+                width = vim.fn.ceil(vim.fn.winwidth(0) * 0.9),
+                height = vim.fn.ceil(vim.fn.winheight(0) * 0.9),
             },
         })
 

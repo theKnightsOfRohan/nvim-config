@@ -10,7 +10,7 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.fillchars = { eob = " " }
-vim.opt.scrolloff = 20
+vim.opt.scrolloff = 10
 vim.opt.timeoutlen = 500
 vim.opt.updatetime = 100
 vim.opt.swapfile = false
@@ -34,8 +34,8 @@ vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
 
 -- Quick save
 vim.keymap.set("n", "<leader>s", function()
-    vim.cmd.write()
-    vim.lsp.buf.format()
+    vim.cmd("silent write")
+    vim.cmd("silent lua vim.lsp.buf.format()")
     vim.cmd.write()
     vim.diagnostic.show(nil, 0)
 end, { noremap = true, silent = true })
@@ -67,7 +67,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         })
     end,
 })
-
 
 vim.api.nvim_set_keymap("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })

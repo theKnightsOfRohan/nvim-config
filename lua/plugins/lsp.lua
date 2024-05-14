@@ -10,6 +10,7 @@ return {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "folke/neodev.nvim",
+        "zeioth/garbage-day.nvim",
     },
     event = "VeryLazy",
     config = function()
@@ -22,11 +23,40 @@ return {
                 border = "rounded",
             },
         })
+
         require("mason-lspconfig").setup({
             handlers = {
                 lsp_zero.default_setup,
             },
         })
+
+
+        local ls = require("luasnip")
+
+        vim.keymap.set({ "i", "s" }, "<C-l>", function()
+            if ls.expand_or_jumpable() then
+                ls.expand_or_jump()
+            end
+        end, { silent = true })
+
+        vim.keymap.set({ "i", "s" }, "<C-h>", function()
+            if ls.expand_or_jumpable(-1) then
+                ls.expand_or_jump(-1)
+            end
+        end, { silent = true })
+
+        --[[ local s = ls.s
+        local fmt = require("luasnip.extras.fmt").fmt
+        local i = ls.insert_node
+        local rep = require("luasnip.extras").rep
+
+        ls.snippets = {
+            cpp = {
+                s("#ifndef", fmt("#ifndef {}_H\n#define{}_H\n\n{}\n\n#endif // {}_H", {
+                    i(1, "HEADERNAME"), rep(1), i(0), rep(1)
+                }))
+            }
+        } ]]
 
         local cmp = require("cmp")
 
@@ -49,59 +79,6 @@ return {
         })
 
         local telescope_builtin = require("telescope.builtin")
-
-        -- See https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
-        local notify = vim.notify
-
-        ---@param msg string
-        ---@param ... any
-        vim.notify = function(msg, ...)
-            if
-                msg:match(
-                    "warning: multiple different client offset_encodings detected for buffer, this is not supported yet"
-                )
-            then
-                return
-            end
-
-            notify(msg, ...)
-        end
-
-        lsp_zero.on_attach(function(client, bufnr)
-            local opts = { buffer = bufnr, remap = false }
-
-            if (client.name ~= "lua_ls") then
-                client.server_capabilities.semanticTokensProvider = nil
-            end
-
-            vim.keymap.set("n", "gd", function()
-                vim.lsp.buf.definition()
-            end, opts)
-
-            vim.keymap.set("n", "gi", function()
-                telescope_builtin.lsp_implementations()
-            end, opts)
-
-            vim.keymap.set("n", "gr", function()
-                telescope_builtin.lsp_references()
-            end, opts)
-
-            vim.keymap.set("n", "<leader>i", function()
-                vim.lsp.buf.hover()
-            end, opts)
-
-            vim.keymap.set("n", "<leader>r", function()
-                vim.lsp.buf.rename()
-            end, opts)
-
-            vim.keymap.set("n", "<leader>a", function()
-                vim.lsp.buf.code_action()
-            end, opts)
-
-            vim.keymap.set("n", "<leader>xx", function()
-                telescope_builtin.diagnostics()
-            end, opts)
-        end)
 
         local lspconfig = require("lspconfig")
 
@@ -131,13 +108,87 @@ return {
             },
         })
 
+        lspconfig.bashls.setup({
+            root_dir = function() vim.fn.getcwd() end,
+            filetypes = { "sh", "zsh" },
+        })
+
+        lspconfig.clangd.setup({
+            root_dir = function() vim.fn.getcwd() end,
+            filetypes = { "c", "cpp", "objc", "objcpp", "h" },
+        })
+
+        lspconfig.jdtls.setup({
+            root_dir = function() vim.fn.getcwd() end,
+            filetypes = { "java" },
+        })
+
+        lspconfig.gradle_ls.setup({
+            root_dir = function() vim.fn.getcwd() end,
+            filetypes = { "gradle" },
+        })
+
+        lspconfig.kotlin_language_server.setup({
+            root_dir = function() vim.fn.getcwd() end,
+            filetypes = { "kotlin" },
+        })
+
+        lspconfig.jsonls.setup({
+            root_dir = function() vim.fn.getcwd() end,
+            filetypes = { "json" },
+        })
+
+        lspconfig.typos_lsp.setup({
+            root_dir = function() vim.fn.getcwd() end,
+            filetypes = { "*" },
+        })
+
+
         for _, config in pairs(lspconfig) do
             if (type(config) == "table" and config.setup) then
                 config.setup({
                     root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
                 })
+
+                print("Setting up " .. config.name)
             end
         end
+
+        lsp_zero.on_attach(function(client, bufnr)
+            local opts = { buffer = bufnr, remap = false }
+
+            if (client.name ~= "lua_ls") then
+                client.server_capabilities.semanticTokensProvider = nil
+            end
+
+            vim.keymap.set("n", "gd", function()
+                vim.lsp.buf.definition()
+            end, opts)
+
+            vim.keymap.set("n", "gi", function()
+                telescope_builtin.lsp_implementations()
+            end, opts)
+
+            vim.keymap.set("n", "gr", function()
+                telescope_builtin.lsp_references()
+            end, opts)
+
+            vim.keymap.set("n", "<leader>i", function()
+                vim.lsp.buf.hover()
+            end, opts)
+
+            vim.keymap.set("n", "<leader>r", function()
+                vim.lsp.buf.rename()
+            end, opts)
+
+            vim.keymap.set({ "n", "v" }, "<leader>a", function()
+                vim.lsp.buf.code_action({})
+            end, opts)
+
+            vim.keymap.set("n", "<leader>xx", function()
+                telescope_builtin.diagnostics()
+            end, opts)
+        end)
 
         vim.diagnostic.config({
             signs = false,
