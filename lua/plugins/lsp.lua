@@ -16,22 +16,26 @@ return {
     config = function()
         local lsp_zero = require("lsp-zero")
 
-        lsp_zero.preset("recommended")
-
         require("mason").setup({
             ui = {
                 border = "rounded",
             },
         })
 
-        require("mason-lspconfig").setup({
-            handlers = {
-                lsp_zero.default_setup,
-            },
-        })
-
+        require("mason-lspconfig").setup({})
 
         local ls = require("luasnip")
+
+        local s = ls.s
+        local fmt = require("luasnip.extras.fmt").fmt
+        local i = ls.insert_node
+        local rep = require("luasnip.extras").rep
+
+        ls.add_snippets("cpp", {
+            s("#ifndef", fmt("#ifndef {}_H\n#define {}_H\n\n{}\n\n#endif // {}_H", {
+                i(1, "HEADERNAME"), rep(1), i(0), rep(1)
+            })),
+        })
 
         vim.keymap.set({ "i", "s" }, "<C-l>", function()
             if ls.expand_or_jumpable() then
@@ -44,19 +48,6 @@ return {
                 ls.expand_or_jump(-1)
             end
         end, { silent = true })
-
-        --[[ local s = ls.s
-        local fmt = require("luasnip.extras.fmt").fmt
-        local i = ls.insert_node
-        local rep = require("luasnip.extras").rep
-
-        ls.snippets = {
-            cpp = {
-                s("#ifndef", fmt("#ifndef {}_H\n#define{}_H\n\n{}\n\n#endif // {}_H", {
-                    i(1, "HEADERNAME"), rep(1), i(0), rep(1)
-                }))
-            }
-        } ]]
 
         local cmp = require("cmp")
 
@@ -76,6 +67,11 @@ return {
                 { name = "path" },
                 { name = "luasnip" },
             },
+            snippet = {
+                expand = function(args)
+                    ls.lsp_expand(args.body)
+                end,
+            }
         })
 
         local telescope_builtin = require("telescope.builtin")
@@ -109,55 +105,44 @@ return {
         })
 
         lspconfig.bashls.setup({
-            root_dir = function() vim.fn.getcwd() end,
-            filetypes = { "sh", "zsh" },
+            root_dir = function() return vim.fn.getcwd() end,
+            filetypes = { "sh", "zsh", "make" },
         })
 
         lspconfig.clangd.setup({
-            root_dir = function() vim.fn.getcwd() end,
+            root_dir = function() return vim.fn.getcwd() end,
             filetypes = { "c", "cpp", "objc", "objcpp", "h" },
         })
 
         lspconfig.jdtls.setup({
-            root_dir = function() vim.fn.getcwd() end,
+            root_dir = function() return vim.fn.getcwd() end,
             filetypes = { "java" },
         })
 
         lspconfig.gradle_ls.setup({
-            root_dir = function() vim.fn.getcwd() end,
+            root_dir = function() return vim.fn.getcwd() end,
             filetypes = { "gradle" },
         })
 
         lspconfig.kotlin_language_server.setup({
-            root_dir = function() vim.fn.getcwd() end,
+            root_dir = function() return vim.fn.getcwd() end,
             filetypes = { "kotlin" },
         })
 
         lspconfig.jsonls.setup({
-            root_dir = function() vim.fn.getcwd() end,
+            root_dir = function() return vim.fn.getcwd() end,
             filetypes = { "json" },
         })
 
         lspconfig.typos_lsp.setup({
-            root_dir = function() vim.fn.getcwd() end,
+            root_dir = function() return vim.fn.getcwd() end,
             filetypes = { "*" },
         })
-
-
-        for _, config in pairs(lspconfig) do
-            if (type(config) == "table" and config.setup) then
-                config.setup({
-                    root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
-                })
-
-                print("Setting up " .. config.name)
-            end
-        end
 
         lsp_zero.on_attach(function(client, bufnr)
             local opts = { buffer = bufnr, remap = false }
 
-            if (client.name ~= "lua_ls") then
+            if (client.name ~= "lua_ls" and client.name ~= "jdtls") then
                 client.server_capabilities.semanticTokensProvider = nil
             end
 
@@ -167,10 +152,6 @@ return {
 
             vim.keymap.set("n", "gi", function()
                 telescope_builtin.lsp_implementations()
-            end, opts)
-
-            vim.keymap.set("n", "gr", function()
-                telescope_builtin.lsp_references()
             end, opts)
 
             vim.keymap.set("n", "<leader>i", function()
@@ -184,16 +165,10 @@ return {
             vim.keymap.set({ "n", "v" }, "<leader>a", function()
                 vim.lsp.buf.code_action({})
             end, opts)
-
-            vim.keymap.set("n", "<leader>xx", function()
-                telescope_builtin.diagnostics()
-            end, opts)
         end)
 
         vim.diagnostic.config({
             signs = false,
         })
-
-        lsp_zero.setup()
     end,
 }

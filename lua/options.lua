@@ -20,7 +20,7 @@ vim.opt.undofile = true
 vim.g.netrw_banner = 0
 
 vim.api.nvim_command("command! Q quitall")
-vim.api.nvim_set_keymap("i", ";;", "<Esc>$a;", { noremap = true, silent = true })
+vim.keymap.set("i", ";;", "<Esc>$a;", { noremap = true, silent = true })
 
 -- Window navigation
 for _, dir in ipairs({ "h", "j", "k", "l" }) do
@@ -30,7 +30,7 @@ for _, dir in ipairs({ "h", "j", "k", "l" }) do
 end
 
 -- Copy highlighted selection to clipboard
-vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
+vim.keymap.set("v", "<C-c>", '"+y', { noremap = true, silent = true })
 
 -- Quick save
 vim.keymap.set("n", "<leader>s", function()
@@ -54,7 +54,7 @@ local surrounders = {
 }
 
 for open, close in pairs(surrounders) do
-    vim.api.nvim_set_keymap("v", open, "c" .. open .. close .. "<Esc>hp", { noremap = true, silent = true })
+    vim.keymap.set("v", open, "c" .. open .. close .. "<Esc>hp", { noremap = true, silent = true })
 end
 
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -68,10 +68,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
-vim.api.nvim_set_keymap("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap("n", "<Esc>", ":noh<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<S-m>", vim.cmd.Man, { noremap = true, silent = true })
+
+vim.keymap.set("n", "<Esc>", vim.cmd.noh, { noremap = true, silent = true })
+
+vim.keymap.set("n", "<S-CR>", "o<Esc>", { noremap = true, silent = true })
 
 vim.api.nvim_create_user_command("Preview", function()
     vim.api.nvim_command("silent !open " .. vim.fn.expand("%:p"))

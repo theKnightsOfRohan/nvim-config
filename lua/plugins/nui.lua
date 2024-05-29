@@ -3,6 +3,26 @@ return {
     config = function()
         local Menu = require("nui.menu")
 
+        ---@param items Array
+        ---@param format_item function
+        ---@param prompt string
+        ---@return integer
+        local function get_max_length(items, format_item, prompt)
+            local max_length = 0
+            for _, item in ipairs(items) do
+                local length = #(format_item(item))
+                if length > max_length then
+                    max_length = length
+                end
+            end
+
+            if #prompt > max_length then
+                max_length = #prompt
+            end
+
+            return max_length
+        end
+
         vim.ui.select = function(items, opts, on_choice)
             vim.validate({
                 items = { items, 'table', false },
@@ -19,7 +39,7 @@ return {
                     col = 0,
                 },
                 size = {
-                    width = 40,
+                    width = get_max_length(items, format_item, opts.prompt or "Select an item"),
                 },
                 zindex = 1000,
                 border = {
@@ -35,11 +55,7 @@ return {
                     local selections = {}
 
                     for _, item in ipairs(items) do
-                        if type(item) == "string" then
-                            table.insert(selections, Menu.item(item))
-                        elseif type(item) == "table" then
-                            table.insert(selections, Menu.item(format_item(item), item))
-                        end
+                        table.insert(selections, Menu.item(format_item(item), { data = item }))
                     end
 
                     return selections
@@ -49,15 +65,9 @@ return {
                     print("Closed")
                 end,
                 on_submit = function(selected)
-                    on_choice(selected)
+                    on_choice(selected.data)
                 end,
             }):mount()
         end
-
-        vim.keymap.set("n", "<leader><leader>", function()
-            vim.ui.select({ 'One', 'Two', 'Three' }, {}, function(selected)
-                print("Selected: " .. selected)
-            end)
-        end)
     end,
 }

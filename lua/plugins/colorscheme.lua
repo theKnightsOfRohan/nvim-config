@@ -1,5 +1,5 @@
 return {
-    "joshdick/onedark.vim",
+    dir = "~/Documents/GitHub/onedark.nvim",
     config = function()
         vim.cmd("colorscheme onedark")
         vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
