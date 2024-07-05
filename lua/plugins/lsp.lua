@@ -11,6 +11,7 @@ return {
         "williamboman/mason-lspconfig.nvim",
         "folke/neodev.nvim",
         "zeioth/garbage-day.nvim",
+        "artemave/workspace-diagnostics.nvim"
     },
     event = "VeryLazy",
     config = function()
@@ -139,19 +140,26 @@ return {
             filetypes = { "*" },
         })
 
+        lspconfig.zls.setup({
+            root_dir = function() return vim.fn.getcwd() end,
+            filetypes = { "zig" },
+        })
+
+        vim.g.zig_fmt_autosave = 0
+
+        require("workspace-diagnostics").setup({})
+
         lsp_zero.on_attach(function(client, bufnr)
             local opts = { buffer = bufnr, remap = false }
 
-            if (client.name ~= "lua_ls" and client.name ~= "jdtls") then
+            require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+
+            if (client.name ~= "lua_ls" and client.name ~= "jdtls" and client.name ~= "zls") then
                 client.server_capabilities.semanticTokensProvider = nil
             end
 
             vim.keymap.set("n", "gd", function()
                 vim.lsp.buf.definition()
-            end, opts)
-
-            vim.keymap.set("n", "gi", function()
-                telescope_builtin.lsp_implementations()
             end, opts)
 
             vim.keymap.set("n", "<leader>i", function()

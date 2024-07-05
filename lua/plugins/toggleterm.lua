@@ -11,6 +11,13 @@ return {
             start_in_insert = true,
             persist_size = true,
             direction = "float",
+            ---@param t Terminal
+            on_open = function(t)
+                vim.keymap.set("t", "<C-Esc>", [[<C-\><C-n>]])
+                vim.keymap.set("n", "q", function()
+                    t:close()
+                end);
+            end,
             close_on_exit = true,
             shell = vim.o.shell,
             float_opts = {

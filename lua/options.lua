@@ -77,6 +77,16 @@ vim.keymap.set("n", "<Esc>", vim.cmd.noh, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<S-CR>", "o<Esc>", { noremap = true, silent = true })
 
+vim.keymap.set("n", "q", "<Nop>", { noremap = true, silent = true })
+
+vim.api.nvim_create_user_command("Record", function()
+    vim.api.nvim_command("normal! qa")
+end, {})
+
+vim.api.nvim_create_user_command("StopRecord", function()
+    vim.api.nvim_command("normal! q")
+end, {})
+
 vim.api.nvim_create_user_command("Preview", function()
     vim.api.nvim_command("silent !open " .. vim.fn.expand("%:p"))
 end, {})

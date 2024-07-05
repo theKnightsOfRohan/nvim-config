@@ -1,5 +1,4 @@
 return {
-    "github/copilot.vim",
     "mhinz/vim-signify",
     {
         dir = "~/Documents/GitHub/venison.nvim/",
