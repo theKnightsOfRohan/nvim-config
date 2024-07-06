@@ -23,7 +23,40 @@ return {
             },
         })
 
-        require("mason-lspconfig").setup({})
+        local ensure_installed = {
+            "bash-language-server",
+            "beautysh",
+            "checkmake",
+            "clang-format",
+            "clangd",
+            "csharpier",
+            "gradle-language-server",
+            "java-debug-adapter",
+            "jdtls",
+            "json-lsp",
+            "kotlin-language-server",
+            "lua-language-server",
+            "luacheck",
+            "omnisharp",
+            "prettierd",
+            "python-lsp-server",
+            "shfmt",
+            "stylua",
+            "typos-lsp",
+            "vim-language-server",
+            "zls",
+        }
+
+        local registry = require("mason-registry")
+
+        for _, package in ipairs(ensure_installed) do
+            local package_info = registry.get_package(package)
+
+            if not package_info:is_installed() then
+                print("Package " .. package .. " is not installed. Installing...")
+                package_info:install({});
+            end
+        end
 
         local ls = require("luasnip")
 
@@ -74,8 +107,6 @@ return {
                 end,
             }
         })
-
-        local telescope_builtin = require("telescope.builtin")
 
         local lspconfig = require("lspconfig")
 
