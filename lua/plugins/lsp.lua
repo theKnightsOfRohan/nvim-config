@@ -1,213 +1,238 @@
 return {
-    "VonHeikemen/lsp-zero.nvim",
-    dependencies = {
-        "neovim/nvim-lspconfig",
-        "hrsh7th/nvim-cmp",
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-nvim-lua",
-        "L3MON4D3/LuaSnip",
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
-        "folke/neodev.nvim",
-        "zeioth/garbage-day.nvim",
-        "artemave/workspace-diagnostics.nvim"
-    },
-    event = "VeryLazy",
-    config = function()
-        local lsp_zero = require("lsp-zero")
+	"neovim/nvim-lspconfig",
+	dependencies = {
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		{
+			"folke/lazydev.nvim",
+			dependencies = {
+				{
+					"hrsh7th/nvim-cmp",
+					opts = function(_, opts)
+						opts.sources = opts.sources or {}
+						table.insert(opts.sources, {
+							name = "lazydev",
+							group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+						})
+					end,
+				},
+			},
+		},
+		"artemave/workspace-diagnostics.nvim",
+		"RubixDev/mason-update-all",
+	},
+	event = "VeryLazy",
+	config = function()
+		require("mason").setup({
+			ui = {
+				border = "rounded",
+			},
+		})
+		require("mason-lspconfig").setup({
+			automatic_enable = true,
+		})
 
-        require("mason").setup({
-            ui = {
-                border = "rounded",
-            },
-        })
+		local ensure_installed = {
+			"asmfmt",
+			"bash-language-server",
+			"basics-language-server",
+			"beautysh",
+			"checkmake",
+			"clang-format",
+			"clangd",
+			"gopls",
+			"json-lsp",
+			"lua-language-server",
+			"luacheck",
+			"pyright",
+			"rust-analyzer",
+			"shfmt",
+			"stylua",
+			"texlab",
+			"verible",
+			"vim-language-server",
+			"zls",
+		}
 
-        local ensure_installed = {
-            "bash-language-server",
-            "beautysh",
-            "checkmake",
-            "clang-format",
-            "clangd",
-            "csharpier",
-            "gradle-language-server",
-            "java-debug-adapter",
-            "jdtls",
-            "json-lsp",
-            "kotlin-language-server",
-            "lua-language-server",
-            "luacheck",
-            "omnisharp",
-            "prettierd",
-            "python-lsp-server",
-            "shfmt",
-            "stylua",
-            "typos-lsp",
-            "vim-language-server",
-            "zls",
-        }
+		local registry = require("mason-registry")
 
-        local registry = require("mason-registry")
+		for _, package in ipairs(ensure_installed) do
+			local package_info = registry.get_package(package)
 
-        for _, package in ipairs(ensure_installed) do
-            local package_info = registry.get_package(package)
+			if not package_info:is_installed() then
+				print("Package " .. package .. " is not installed. Installing...")
+				package_info:install({})
+			end
+		end
 
-            if not package_info:is_installed() then
-                print("Package " .. package .. " is not installed. Installing...")
-                package_info:install({});
-            end
-        end
+		require("mason-update-all").setup({})
 
-        local ls = require("luasnip")
+		vim.lsp.config["lua_ls"] = {
+			settings = {
+				Lua = {
+					runtime = {
+						-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+						version = "LuaJIT",
+					},
+					diagnostics = {
+						-- Get the language server to recognize the `vim` global
+						globals = { "vim" },
+					},
+					workspace = {
+						-- Make the server aware of Neovim runtime files
+						library = {
+							"${3rd}/luv/library",
+							unpack(vim.api.nvim_get_runtime_file("", true)),
+						},
+					},
+					-- Do not send telemetry data containing a randomized but unique identifier
+					telemetry = {
+						enable = false,
+					},
+					completion = {
+						singleFileMode = false,
+					},
+				},
+			},
+			filetypes = { "lua" },
+		}
+		vim.lsp.enable("lua_ls", true)
 
-        local s = ls.s
-        local fmt = require("luasnip.extras.fmt").fmt
-        local i = ls.insert_node
-        local rep = require("luasnip.extras").rep
+		local basic_servers = {
+			["bashls"] = { "sh", "zsh" },
+			["clangd"] = { "c", "cpp", "objc", "objcpp", "h" },
+			["gopls"] = { "go" },
+			["zls"] = { "zig" },
+			["verible"] = { "systemverilog", "verilog" },
+			["pyright"] = { "python" },
+			["texlab"] = { "latex", "markdown" },
+			["rust_analyzer"] = { "rust" },
+		}
 
-        ls.add_snippets("cpp", {
-            s("#ifndef", fmt("#ifndef {}_H\n#define {}_H\n\n{}\n\n#endif // {}_H", {
-                i(1, "HEADERNAME"), rep(1), i(0), rep(1)
-            })),
-        })
+		for server, fts in pairs(basic_servers) do
+			vim.lsp.config(server, {
+				filetypes = fts,
+			})
+			vim.lsp.enable(server, true)
+		end
 
-        vim.keymap.set({ "i", "s" }, "<C-l>", function()
-            if ls.expand_or_jumpable() then
-                ls.expand_or_jump()
-            end
-        end, { silent = true })
+		local generic_servers = {
+			"basics_ls",
+		}
 
-        vim.keymap.set({ "i", "s" }, "<C-h>", function()
-            if ls.expand_or_jumpable(-1) then
-                ls.expand_or_jump(-1)
-            end
-        end, { silent = true })
+		for _, server in ipairs(generic_servers) do
+			vim.lsp.config(server, {
+				filetypes = { "asm", "markdown" },
+			})
+			vim.lsp.enable(server, true)
+		end
 
-        local cmp = require("cmp")
+		vim.g.zig_fmt_autosave = 0
 
-        cmp.setup({
-            window = {
-                documentation = cmp.config.window.bordered(),
-                completion = cmp.config.window.bordered(),
-            },
-            mapping = cmp.mapping.preset.insert({
-                ["<C-j>"] = cmp.mapping.select_next_item(),
-                ["<C-k>"] = cmp.mapping.select_prev_item(),
-                ["<C-CR>"] = cmp.mapping.confirm({ select = true }),
-            }),
-            sources = {
-                { name = "nvim_lua" },
-                { name = "nvim_lsp" },
-                { name = "path" },
-                { name = "luasnip" },
-            },
-            snippet = {
-                expand = function(args)
-                    ls.lsp_expand(args.body)
-                end,
-            }
-        })
+		require("workspace-diagnostics").setup({})
 
-        local lspconfig = require("lspconfig")
+		vim.api.nvim_create_autocmd("LspAttach", {
+			callback = function(event)
+				local client = vim.lsp.get_client_by_id(event.data.client_id)
+				local bufnr = event.buf
+				local opts = { buffer = bufnr, remap = false }
 
-        lspconfig.lua_ls.setup({
-            settings = {
-                Lua = {
-                    runtime = {
-                        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                        version = "LuaJIT",
-                    },
-                    diagnostics = {
-                        -- Get the language server to recognize the `vim` global
-                        globals = { "vim" },
-                    },
-                    workspace = {
-                        -- Make the server aware of Neovim runtime files
-                        library = {
-                            "${3rd}/luv/library",
-                            unpack(vim.api.nvim_get_runtime_file("", true)),
-                        },
-                    },
-                    -- Do not send telemetry data containing a randomized but unique identifier
-                    telemetry = {
-                        enable = false,
-                    },
-                },
-            },
-        })
+				require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
 
-        lspconfig.bashls.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "sh", "zsh", "make" },
-        })
+				vim.keymap.set("n", "gd", function()
+					vim.lsp.buf.definition()
+				end, opts)
 
-        lspconfig.clangd.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "c", "cpp", "objc", "objcpp", "h" },
-        })
+				vim.keymap.set("n", "<leader>i", function()
+					vim.lsp.buf.hover({ border = "rounded" })
+				end, opts)
 
-        lspconfig.jdtls.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "java" },
-        })
+				vim.keymap.set("n", "<leader>r", function()
+					vim.lsp.buf.rename()
+				end, opts)
 
-        lspconfig.gradle_ls.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "gradle" },
-        })
+				vim.keymap.set({ "n", "v" }, "<leader>a", function()
+					vim.lsp.buf.code_action({})
+				end, opts)
+			end,
+		})
 
-        lspconfig.kotlin_language_server.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "kotlin" },
-        })
+		-- Below diagnostics config and autocmds lifted from https://www.reddit.com/r/neovim/comments/1jpbc7s/disable_virtual_text_if_there_is_diagnostic_in/?share_id=TMnSUgCygO7v9SW_qlAv4&utm_medium=ios_app&utm_name=ioscss&utm_source=share&utm_term=1
+		vim.diagnostic.config({
+			virtual_text = true,
+			virtual_lines = { current_line = true },
+			underline = true,
+			update_in_insert = false,
+			signs = false,
+		})
 
-        lspconfig.jsonls.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "json" },
-        })
+		vim.api.nvim_create_autocmd({ "CursorMoved", "DiagnosticChanged" }, {
+			group = vim.api.nvim_create_augroup("diagnostic_virt_text_hide", {}),
+			callback = function(ev)
+				local lnum, _ = unpack(vim.api.nvim_win_get_cursor(0))
+				lnum = lnum - 1 -- need 0-based index
 
-        lspconfig.typos_lsp.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "*" },
-        })
+				local hidden_lnum = vim.b[ev.buf].diagnostic_hidden_lnum
+				if hidden_lnum and hidden_lnum ~= lnum then
+					vim.b[ev.buf].diagnostic_hidden_lnum = nil
+					-- display all the decorations if the current line changed
+					vim.diagnostic.show(nil, ev.buf)
+				end
 
-        lspconfig.zls.setup({
-            root_dir = function() return vim.fn.getcwd() end,
-            filetypes = { "zig" },
-        })
+				for _, namespace in pairs(vim.diagnostic.get_namespaces()) do
+					local ns_id = namespace.user_data.virt_text_ns
+					if ns_id then
+						local extmarks = vim.api.nvim_buf_get_extmarks(ev.buf, ns_id, { lnum, 0 }, { lnum, -1 }, {})
+						for _, extmark in pairs(extmarks) do
+							local id = extmark[1]
+							vim.api.nvim_buf_del_extmark(ev.buf, ns_id, id)
+						end
 
-        vim.g.zig_fmt_autosave = 0
+						if extmarks and not vim.b[ev.buf].diagnostic_hidden_lnum then
+							vim.b[ev.buf].diagnostic_hidden_lnum = lnum
+						end
+					end
+				end
+			end,
+		})
 
-        require("workspace-diagnostics").setup({})
-
-        lsp_zero.on_attach(function(client, bufnr)
-            local opts = { buffer = bufnr, remap = false }
-
-            require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-
-            if (client.name ~= "lua_ls" and client.name ~= "jdtls" and client.name ~= "zls") then
-                client.server_capabilities.semanticTokensProvider = nil
-            end
-
-            vim.keymap.set("n", "gd", function()
-                vim.lsp.buf.definition()
-            end, opts)
-
-            vim.keymap.set("n", "<leader>i", function()
-                vim.lsp.buf.hover()
-            end, opts)
-
-            vim.keymap.set("n", "<leader>r", function()
-                vim.lsp.buf.rename()
-            end, opts)
-
-            vim.keymap.set({ "n", "v" }, "<leader>a", function()
-                vim.lsp.buf.code_action({})
-            end, opts)
-        end)
-
-        vim.diagnostic.config({
-            signs = false,
-        })
-    end,
+		-- local og_virt_text
+		-- local og_virt_line
+		-- vim.api.nvim_create_autocmd({ "CursorMoved", "DiagnosticChanged" }, {
+		-- 	group = vim.api.nvim_create_augroup("diagnostic_only_virtlines", {}),
+		-- 	callback = function()
+		-- 		if og_virt_line == nil then
+		-- 			og_virt_line = vim.diagnostic.config().virtual_lines
+		-- 		end
+		--
+		-- 		-- ignore if virtual_lines.current_line is disabled
+		-- 		if not (og_virt_line and og_virt_line.current_line) then
+		-- 			if og_virt_text then
+		-- 				vim.diagnostic.config({ virtual_text = og_virt_text })
+		-- 				og_virt_text = nil
+		-- 			end
+		-- 			return
+		-- 		end
+		--
+		-- 		if og_virt_text == nil then
+		-- 			og_virt_text = vim.diagnostic.config().virtual_text
+		-- 		end
+		--
+		-- 		local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
+		--
+		-- 		if vim.tbl_isempty(vim.diagnostic.get(0, { lnum = lnum })) then
+		-- 			vim.diagnostic.config({ virtual_text = og_virt_text })
+		-- 		else
+		-- 			vim.diagnostic.config({ virtual_text = false })
+		-- 		end
+		-- 	end,
+		-- })
+		--
+		-- vim.api.nvim_create_autocmd("ModeChanged", {
+		-- 	group = vim.api.nvim_create_augroup("diagnostic_redraw", {}),
+		-- 	callback = function()
+		-- 		pcall(vim.diagnostic.show)
+		-- 	end,
+		-- })
+	end,
 }

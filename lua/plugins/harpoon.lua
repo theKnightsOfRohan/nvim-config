@@ -23,18 +23,10 @@ return {
             harpoon.ui:toggle_quick_menu(harpoon:list())
         end)
 
-        -- TODO: Figure out how to turn this into numbers
-        vim.keymap.set("n", "<C-q>", function()
-            require("harpoon"):list():select(1)
-        end)
-        vim.keymap.set("n", "<C-w>", function()
-            require("harpoon"):list():select(2)
-        end)
-        vim.keymap.set("n", "<C-e>", function()
-            require("harpoon"):list():select(3)
-        end)
-        vim.keymap.set("n", "<C-r>", function()
-            require("harpoon"):list():select(4)
-        end)
+        for i = 1, 4 do
+            vim.keymap.set({ "n", "i" }, "<M-" .. tostring(i) .. ">", function()
+                require("harpoon"):list():select(i)
+            end)
+        end
     end,
 }
