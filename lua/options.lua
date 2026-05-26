@@ -155,33 +155,30 @@ vim.api.nvim_create_autocmd("TermOpen", {
 	end,
 })
 
-vim.keymap.set("n", "<leader>g", function()
-	vim.cmd([[
-        terminal lazygit
-        startinsert
-    ]])
+local function map_tui(key, command)
+	vim.keymap.set("n", "<leader>" .. key, function()
+		local prev_buf = vim.api.nvim_get_current_buf()
+		local prev_win = vim.api.nvim_get_current_win()
 
-	vim.api.nvim_create_autocmd("TermClose", {
-		buffer = 0,
-		callback = function()
-			vim.api.nvim_feedkeys("q", "t", true)
-		end,
-	})
-end)
+		vim.cmd("terminal " .. command)
 
-vim.keymap.set("n", "<leader>d", function()
-	vim.cmd([[
-        terminal lazydocker
-        startinsert
-    ]])
+		local term_buf = vim.api.nvim_get_current_buf()
 
-	vim.api.nvim_create_autocmd("TermClose", {
-		buffer = 0,
-		callback = function()
-			vim.api.nvim_feedkeys("q", "t", true)
-		end,
-	})
-end)
+		vim.api.nvim_create_autocmd("TermClose", {
+			buffer = term_buf,
+			callback = function()
+				if vim.api.nvim_win_is_valid(prev_win) and vim.api.nvim_buf_is_valid(prev_buf) then
+					vim.api.nvim_win_set_buf(prev_win, prev_buf)
+				end
+				pcall(vim.api.nvim_buf_delete, term_buf, { force = true })
+			end,
+		})
+	end)
+end
+
+map_tui("g", "lazygit")
+map_tui("d", "lazydocker")
+map_tui("c", "opencode")
 
 vim.api.nvim_create_user_command("Pyrun", function(_)
 	local filepath = vim.fn.expand("%:p")
