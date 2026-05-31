@@ -1,6 +1,18 @@
 return {
 	"theKnightsOfRohan/onedark.nvim",
+	-- "olimorris/onedarkpro.nvim",
 	config = function()
+		-- require("onedarkpro").setup({
+		-- 	options = {
+		-- 		transparency = true,
+		-- 	},
+		-- 	highlights = {
+		-- 		Type = {
+		-- 			fg = { onedark = "${yellow}" },
+		-- 		},
+		-- 	},
+		-- })
+
 		vim.cmd("colorscheme onedark")
 		vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })

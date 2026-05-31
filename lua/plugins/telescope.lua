@@ -6,8 +6,8 @@ return {
 	config = function()
 		require("telescope").setup({
 			defaults = {
-				layout_strategy = "horizontal",
-				layout_config = { height = { padding = 0 }, width = { padding = 0 } },
+				layout_strategy = "current_buffer",
+				-- layout_config = { height = { padding = 0 }, width = { padding = 0 } },
 				mappings = {
 					i = {
 						["<C-q>"] = function(prompt_bufnr)
