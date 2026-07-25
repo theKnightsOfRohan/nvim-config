@@ -1,36 +1,46 @@
-return {
-	"numToStr/Comment.nvim",
-	config = function()
-		require("Comment").setup({
-			-- Add a space b/w comment and the line
-			padding = true,
-			-- Whether the cursor should stay at its position
-			sticky = true,
-			-- Lines to be ignored while (un)comment
-			ignore = nil,
-			-- LHS of toggle mappings in NORMAL mode
-			toggler = {
-				line = "<M-/>",
-				block = "<M-\\>",
-			},
-			-- LHS of operator-pending mappings in NORMAL and VISUAL mode
-			opleader = {
-				line = "<M-/>",
-				block = "<M-\\>",
-			},
-			-- LHS of extra mappings
-			extra = {
-				above = "gcO",
-				below = "gco",
-				eol = "gcA",
-			},
-			-- Enable keybindings
-			mappings = {
-				basic = true,
-				extra = false,
-			},
-			pre_hook = nil,
-			post_hook = nil,
-		})
-	end,
-}
+vim.pack.add({
+	gh("nvim-mini/mini.comment"),
+})
+
+require("mini.comment").setup({
+	-- No need to copy this inside `setup()`. Will be used automatically.
+	-- Options which control module behavior
+	options = {
+		-- Function to compute custom 'commentstring' (optional)
+		custom_commentstring = nil,
+
+		-- Whether to ignore blank lines when commenting
+		ignore_blank_line = false,
+
+		-- Whether to ignore blank lines in actions and textobject
+		start_of_line = false,
+
+		-- Whether to force single space inner padding for comment parts
+		pad_comment_parts = true,
+	},
+
+	-- Module mappings. Use `''` (empty string) to disable one.
+	mappings = {
+		-- Toggle comment (like `gcip` - comment inner paragraph) for both
+		-- Normal and Visual modes
+		comment = "",
+
+		-- Toggle comment on current line
+		comment_line = "<M-/>",
+
+		-- Toggle comment on visual selection
+		comment_visual = "<M-/>",
+
+		-- Define 'comment' textobject (like `dgc` - delete whole comment block)
+		-- Works also in Visual mode if mapping differs from `comment_visual`
+		textobject = "",
+	},
+
+	-- Hook functions to be executed at certain stage of commenting
+	hooks = {
+		-- Before successful commenting. Does nothing by default.
+		pre = function() end,
+		-- After successful commenting. Does nothing by default.
+		post = function() end,
+	},
+})

@@ -9,7 +9,7 @@ vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 vim.o.smartindent = true
-vim.o.fillchars = { eob = " " }
+vim.opt.fillchars = { eob = " " }
 vim.o.scrolloff = 10
 vim.o.timeoutlen = 500
 vim.o.updatetime = 100
@@ -18,10 +18,18 @@ vim.o.hidden = true
 vim.o.termguicolors = true
 vim.o.undofile = true
 vim.o.signcolumn = "yes:1"
-vim.o.completeopt:append("fuzzy")
+vim.o.completeopt = "menu,popup,fuzzy"
 vim.o.winborder = "rounded"
 vim.g.netrw_banner = 0
 vim.cmd("set ignorecase smartcase")
+
+gh = function(str)
+    return "https://github.com/" .. str
+end
+
+cb = function(str)
+    return "https://codeberg.org/" .. str
+end
 
 vim.keymap.set("i", ";;", "<Esc>$a;", { noremap = true, silent = true })
 vim.keymap.set("n", ";;", ";", { noremap = true, silent = true })
