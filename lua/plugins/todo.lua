@@ -1,6 +1,6 @@
 vim.pack.add({
-	gh "nvim-lua/plenary.nvim",
-	gh "folke/todo-comments.nvim",
+	gh("nvim-lua/plenary.nvim"),
+	gh("folke/todo-comments.nvim"),
 })
 
 require("todo-comments").setup({

@@ -1,8 +1,8 @@
 vim.pack.add({
-	gh "MunifTanjim/nui.nvim",
-	gh "MeanderingProgrammer/render-markdown.nvim",
-	gh "nvim-treesitter/nvim-treesitter",
-	gh "nvim-tree/nvim-web-devicons",
+	gh("MunifTanjim/nui.nvim"),
+	gh("MeanderingProgrammer/render-markdown.nvim"),
+	gh("nvim-treesitter/nvim-treesitter"),
+	gh("nvim-tree/nvim-web-devicons"),
 })
 
 ---@param items Array

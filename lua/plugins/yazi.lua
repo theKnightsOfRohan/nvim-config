@@ -1,6 +1,6 @@
-vim.pack.add({ 
-    gh "mikavilpas/yazi.nvim", 
-    gh "nvim-lua/plenary.nvim" 
+vim.pack.add({
+	gh("mikavilpas/yazi.nvim"),
+	gh("nvim-lua/plenary.nvim"),
 })
 
 vim.g.loaded_netrwPlugin = 1

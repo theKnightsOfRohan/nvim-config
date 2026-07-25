@@ -1,6 +1,6 @@
-vim.pack.add({ 
-    gh "nvim-lualine/lualine.nvim", 
-    gh "abeldekat/harpoonline" 
+vim.pack.add({
+	gh("nvim-lualine/lualine.nvim"),
+	gh("abeldekat/harpoonline"),
 })
 
 local Harpoonline = require("harpoonline")

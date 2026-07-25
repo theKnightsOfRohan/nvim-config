@@ -1,6 +1,6 @@
 vim.pack.add({
-	gh "folke/trouble.nvim",
-	gh "nvim-telescope/telescope.nvim",
+	gh("folke/trouble.nvim"),
+	gh("nvim-telescope/telescope.nvim"),
 })
 require("telescope").setup({
 	defaults = {

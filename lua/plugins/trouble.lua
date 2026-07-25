@@ -1,6 +1,6 @@
 vim.pack.add({
-	gh "nvim-tree/nvim-web-devicons",
-	gh "folke/trouble.nvim",
+	gh("nvim-tree/nvim-web-devicons"),
+	gh("folke/trouble.nvim"),
 })
 
 require("trouble").setup()

@@ -1,5 +1,5 @@
-vim.pack.add({ 
-    gh "mbbill/undotree" 
+vim.pack.add({
+	gh("mbbill/undotree"),
 })
 
 vim.keymap.set("n", "<leader>u", function()

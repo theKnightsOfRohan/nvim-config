@@ -1,11 +1,11 @@
 vim.pack.add({
-	gh "neovim/nvim-lspconfig",
-	gh "williamboman/mason.nvim",
-	gh "williamboman/mason-lspconfig.nvim",
-	gh "hrsh7th/nvim-cmp",
-	gh "folke/lazydev.nvim",
-	gh "artemave/workspace-diagnostics.nvim",
-	gh "RubixDev/mason-update-all",
+	gh("neovim/nvim-lspconfig"),
+	gh("williamboman/mason.nvim"),
+	gh("williamboman/mason-lspconfig.nvim"),
+	gh("hrsh7th/nvim-cmp"),
+	gh("folke/lazydev.nvim"),
+	gh("artemave/workspace-diagnostics.nvim"),
+	gh("RubixDev/mason-update-all"),
 })
 
 local cmp = require("cmp")

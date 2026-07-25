@@ -1,8 +1,8 @@
 vim.pack.add({
-	gh "nvim-mini/mini.pairs",
-	gh "lewis6991/gitsigns.nvim",
-	cb "ziglang/zig.vim",
-	gh "j-hui/fidget.nvim",
+	gh("nvim-mini/mini.pairs"),
+	gh("lewis6991/gitsigns.nvim"),
+	cb("ziglang/zig.vim"),
+	gh("j-hui/fidget.nvim"),
 })
 
 require("mini.pairs").setup({})

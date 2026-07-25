@@ -1,5 +1,5 @@
-vim.pack.add({ 
-    gh "jaimecgomezz/here.term" 
+vim.pack.add({
+	gh("jaimecgomezz/here.term"),
 })
 
 require("here-term").setup({

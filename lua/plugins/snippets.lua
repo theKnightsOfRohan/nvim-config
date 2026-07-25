@@ -1,13 +1,13 @@
 vim.pack.add({
-	gh "chrisgrieser/nvim-scissors",
-	gh "nvim-telescope/telescope.nvim",
-	gh "garymjr/nvim-snippets",
-	gh "hrsh7th/nvim-cmp",
-	gh "hrsh7th/cmp-nvim-lsp",
-	gh "hrsh7th/cmp-path",
-	gh "hrsh7th/cmp-nvim-lua",
-	gh "saadparwaiz1/cmp_luasnip",
-	gh "L3MON4D3/LuaSnip",
+	gh("chrisgrieser/nvim-scissors"),
+	gh("nvim-telescope/telescope.nvim"),
+	gh("garymjr/nvim-snippets"),
+	gh("hrsh7th/nvim-cmp"),
+	gh("hrsh7th/cmp-nvim-lsp"),
+	gh("hrsh7th/cmp-path"),
+	gh("hrsh7th/cmp-nvim-lua"),
+	gh("saadparwaiz1/cmp_luasnip"),
+	gh("L3MON4D3/LuaSnip"),
 })
 
 -- default settings
