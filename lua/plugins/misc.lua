@@ -55,4 +55,10 @@ return {
 		end,
 	},
 	"ziglang/zig.vim",
+	{
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup({})
+		end,
+	},
 }

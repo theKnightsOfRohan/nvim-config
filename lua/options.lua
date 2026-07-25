@@ -2,23 +2,23 @@
 vim.g.mapleader = ";"
 
 -- General settings
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.smartindent = true
-vim.opt.fillchars = { eob = " " }
-vim.opt.scrolloff = 10
-vim.opt.timeoutlen = 500
-vim.opt.updatetime = 100
-vim.opt.swapfile = false
-vim.opt.hidden = true
-vim.opt.termguicolors = true
-vim.opt.undofile = true
-vim.opt.signcolumn = "yes:1"
-vim.opt.completeopt:append("fuzzy")
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+vim.o.smartindent = true
+vim.o.fillchars = { eob = " " }
+vim.o.scrolloff = 10
+vim.o.timeoutlen = 500
+vim.o.updatetime = 100
+vim.o.swapfile = false
+vim.o.hidden = true
+vim.o.termguicolors = true
+vim.o.undofile = true
+vim.o.signcolumn = "yes:1"
+vim.o.completeopt:append("fuzzy")
 vim.o.winborder = "rounded"
 vim.g.netrw_banner = 0
 vim.cmd("set ignorecase smartcase")
