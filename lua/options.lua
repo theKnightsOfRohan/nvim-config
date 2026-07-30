@@ -24,11 +24,11 @@ vim.g.netrw_banner = 0
 vim.cmd("set ignorecase smartcase")
 
 gh = function(str)
-    return "https://github.com/" .. str
+	return "https://github.com/" .. str
 end
 
 cb = function(str)
-    return "https://codeberg.org/" .. str
+	return "https://codeberg.org/" .. str
 end
 
 vim.keymap.set("i", ";;", "<Esc>$a;", { noremap = true, silent = true })

@@ -111,7 +111,7 @@
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "onedark.nvim": {
-      "rev": "a52d924a9215eb4afacee99fe3298490f99ca39b",
+      "rev": "6163a3192f00e318d254b12076a47ac73bcd7fc7",
       "src": "https://github.com/theKnightsOfRohan/onedark.nvim"
     },
     "plenary.nvim": {
