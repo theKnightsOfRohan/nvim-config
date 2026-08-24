@@ -38,6 +38,7 @@ require("nvim-treesitter").install({
 	"rust",
 	"zig",
 	"asm",
+	"bash",
 	"toml",
 	"yaml",
 	"json",

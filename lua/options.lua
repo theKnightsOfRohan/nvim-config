@@ -47,7 +47,6 @@ vim.keymap.set("n", "<leader>s", function()
 	vim.cmd([[keeppatterns %s/\s\+$//e]])
 	vim.cmd.write()
 	pcall(vim.diagnostic.show)
-	local help = {}
 end, { noremap = true, silent = true })
 
 -- Visual mode bracket surround
